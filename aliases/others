@@ -26,3 +26,6 @@ alias tm='tmux list-sessions && tmux attach || tmux'
 
 # I'm way too used to autojump `j`
 alias j=z
+
+# French time
+paris='TZ=France/Paris date'
