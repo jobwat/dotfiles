@@ -34,6 +34,7 @@ Plug 'tsaleh/vim-align'
 Plug 'godlygeek/tabular'
 Plug 'ctrlpvim/ctrlp.vim' " FuzzySearch in tree
 Plug 'tpope/vim-fugitive' "embedded git
+Plug 'tpope/vim-rhubarb' "enable github page browse through vim-fugitive & hub
 Plug 'tpope/vim-unimpaired' "magic ]q jumps
 Plug 'rking/ag.vim' " silversearcher via :Ag
 Plug 'bogado/file-line' "open file at line :line
