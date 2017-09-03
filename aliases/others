@@ -29,3 +29,6 @@ alias j=z
 
 # French time
 alias paris='TZ=France/Paris date'
+
+# reload the shell session
+alias reload='source ~/.zshrc'
