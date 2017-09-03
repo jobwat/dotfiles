@@ -28,4 +28,4 @@ alias tm='tmux list-sessions && tmux attach || tmux'
 alias j=z
 
 # French time
-paris='TZ=France/Paris date'
+alias paris='TZ=France/Paris date'
