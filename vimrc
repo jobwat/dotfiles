@@ -48,13 +48,13 @@ call plug#end()
 " assigning a leader key and mapping some commands to it
 let mapleader = ","
 " ',s' to clean trailing spaces and remove tabs
-map <leader>s :%s/\s\+$//e \| :%s/\t/  /ge<CR><C-o>  
+map <leader>s :%s/\s\+$//e \| :%s/\t/  /ge<CR><C-o>
 " ',=' to xml re-indent
 map <leader>= <Esc>:1,$!xmllint --format -<CR>
 " ',l' to toggle wordwrap
 nnoremap <leader>k :set invwrap wrap?<CR>
 " ',d' to toggle the NERDTree
-nnoremap <leader>d :NERDTreeToggle<CR>  
+nnoremap <leader>d :NERDTreeToggle<CR>
 " Change few NerdTree shortcuts
 let NERDTreeMapOpenVSplit='v'
 let NERDTreeMapOpenSplit='s'
@@ -145,9 +145,14 @@ autocmd BufRead,BufNewFile *.css,*.scss,*.less setlocal foldmethod=marker foldma
 " Auto-clean fugitive buffers
 autocmd BufReadPost fugitive://* set bufhidden=delete
 
+" Auto-clean spaces
+autocmd BufWritePre * :RemoveTrailingSpaces
+
 
 " -- some functions --
 
+" Remove trailing spaces -- https://stackoverflow.com/questions/356126/how-can-you-automatically-remove-trailing-whitespace-in-vim
+command! RemoveTrailingSpaces :%s/\s\+$//e
 
 " DoPrettyXML beautifies an XML buffer (XML must be valid)
 function! DoPrettyXML()
