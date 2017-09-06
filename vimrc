@@ -90,9 +90,6 @@ let g:ackprg="ack -H --nocolor --nogroup --column --ignore-dir log --ignore-dir 
 :vmap "" S"
 :vmap '' S'
 
-" add mapping for json pretty print - https://pascalprecht.github.io/2014/07/10/pretty-print-json-in-vim/
-map <leader>jp <Esc>:%!python -m json.tool<CR>
-
 " set options
 set nocompatible " needed by some plugins
 set backspace=indent,eol,start
@@ -134,6 +131,16 @@ endif
 " Shift-K searchs with ag
 nnoremap K :Ag <C-R><C-W><CR>
 
+" mapping to change the working directory to the current file path
+nnoremap ,cd :lcd %:p:h<CR>
+
+" associate specific extensions with specific filetypes
+autocmd BufRead,BufNewFile *.rc set filetype=sh
+autocmd BufRead,BufNewFile *.hamlc,*.hamstache set filetype=haml
+autocmd BufRead,BufNewFile *.template,*.json set filetype=json foldmethod=syntax
+let g:vim_json_syntax_conceal = 0 " specific to vim-json plugin (to keep the double quotes visible)
+autocmd BufRead,BufNewFile *.css,*.scss,*.less setlocal foldmethod=marker foldmarker={,}
+
 " Fugitive setups -  http://vimcasts.org/episodes/fugitive-vim-browsing-the-git-object-database/
 " Auto-clean fugitive buffers
 autocmd BufReadPost fugitive://* set bufhidden=delete
@@ -173,8 +180,8 @@ endfunction
 command! PrettyXML :call DoPrettyXML()
 command! BeautifyXML :call DoPrettyXML()
 
-command! PrettyJSON :%!python -m json.tool
 command! BeautifyJSON :%!python -m json.tool
+command! PrettyJSON :BeautifyJSON
 
 " RePackXML de-beautify an XML buffer (compact style)
 function! RePackXML()
@@ -187,16 +194,6 @@ function! RePackXML()
 endfunction
 command! PackXML :call RePackXML()
 command! RePackXML :call RePackXML()
-
-" mapping to change the working directory to the current file path
-nnoremap ,cd :lcd %:p:h<CR>
-
-" associate specific extensions with specific filetypes
-autocmd BufRead,BufNewFile *.rc set filetype=sh
-autocmd BufRead,BufNewFile *.hamlc,*.hamstache set filetype=haml
-autocmd BufRead,BufNewFile *.template,*.json set filetype=json foldmethod=syntax
-let g:vim_json_syntax_conceal = 0 " specific to vim-json plugin (to keep the double quotes visible)
-autocmd BufRead,BufNewFile *.css,*.scss,*.less setlocal foldmethod=marker foldmarker={,}
 
 " Delete file from current buffer - from http://vim.wikia.com/wiki/Delete_files_with_a_Vim_command
 function! DeleteFile(...)
@@ -225,7 +222,8 @@ com! Rm call DeleteFile()
 "delete the file and quit the buffer (quits vim if this was the last file)
 com! RM call DeleteFile() <Bar> q!
 
-" Let's stay lazy !
+" -- Let's stay lazy ! --
+
 " Force write the file using sudo permissions
 command! Sudow w !sudo tee % > /dev/null
 " Often type W instead of w
