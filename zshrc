@@ -1,3 +1,6 @@
+# Quit unless interactive session
+[ -z "$PS1" ] && return
+
 unamestr=`uname`
 if [[ "$unamestr" =~ 'Darwin' ]]; then
   # MacOS
@@ -6,7 +9,7 @@ if [[ "$unamestr" =~ 'Darwin' ]]; then
   # thx Robin Daugherty - http://superuser.com/a/830850/91702
   # 0 . Enter
   bindkey -s "^[Op" "0"
-  bindkey -s "^[On" "." 
+  bindkey -s "^[On" "."
   bindkey -s "^[OM" "^M"
   # 1 2 3
   bindkey -s "^[Oq" "1"
@@ -35,13 +38,11 @@ if [[ "$unamestr" =~ 'Darwin' ]]; then
     }
     chpwd
   }
+  export PATH=$PATH:/usr/local/homebrew/bin
 
 fi
 
 export EDITOR="vim"
-
-# Quit unless interactive session
-[ -z "$PS1" ] && return
 
 # oh-my-zsh configuration
 export ZSH=$HOME/.oh-my-zsh
@@ -80,3 +81,4 @@ z() {
   [ $# -gt 0 ] && _z "$*" && return
   cd "$(_z -l 2>&1 | fzf-tmux +s --tac --query "$*" | sed 's/^[0-9,.]* *//')"
 }
+
