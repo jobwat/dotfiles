@@ -40,6 +40,11 @@ task :install, [:replace_all] do |t, args|
 
   # update vim's plugins
   update_plugins
+
+  # install fzf (fuzzy matcher)
+  system %Q{git clone --depth 1 https://github.com/junegunn/fzf.git ~/.fzf}
+  system %Q{~/.fzf/install}
+
 end
 
 task :update do
