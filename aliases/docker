@@ -14,7 +14,7 @@ alias dps="docker ps"
 alias dpa="docker ps -a"
 
 # Get images
-alias di="docker images"
+alias di="docker images | head -n40"
 
 # Get container IP
 alias dip="docker inspect --format '{{ .NetworkSettings.IPAddress }}'"
@@ -43,7 +43,7 @@ alias drmuntagged='docker rmi $(docker images | grep "^<none>" | awk "{print $4}
 # Remove dangling images - https://stackoverflow.com/questions/32723111/how-to-remove-old-and-unused-docker-images
 alias drmdangled='docker rmi $(docker images --filter "dangling=true" -q --no-trunc)'
 
-# Dockerfile build, e.g., $dbu tcnksm/test 
+# Dockerfile build, e.g., $dbu tcnksm/test
 dbu() { docker build -t=$1 .; }
 
 # Show all alias related docker
