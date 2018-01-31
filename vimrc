@@ -15,7 +15,7 @@ Plug 'vim-ruby/vim-ruby', { 'for':  'ruby' }
 Plug 'kchmck/vim-coffee-script', { 'for':  'coffee' }
 Plug 'moll/vim-node', { 'for':  'node' }
 Plug 'chase/vim-ansible-yaml', { 'for':  'yml' }
-Plug 'evanmiller/nginx-vim-syntax', { 'for':  'nginx.conf' }
+Plug 'chr4/nginx.vim', { 'for':  'nginx.conf' }
 " fold plugins
 Plug 'nelstrom/vim-markdown-folding', { 'for':  'markdown' }
 " theme plugins
