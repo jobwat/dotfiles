@@ -19,7 +19,7 @@ Plug 'chr4/nginx.vim', { 'for':  'nginx.conf' }
 " fold plugins
 Plug 'nelstrom/vim-markdown-folding', { 'for':  'markdown' }
 " theme plugins
-Plug 'jpo/vim-railscasts-theme'
+Plug 'jobwat/vim-railscasts-theme'
 Plug 'vim-scripts/vibrantink'
 " toys
 Plug 'scrooloose/nerdtree', { 'on':  'NERDTreeToggle' }
