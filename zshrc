@@ -48,14 +48,11 @@ export EDITOR="vim"
 export ZSH=$HOME/.oh-my-zsh
 # Set to the name theme to load. (Look in ~/.oh-my-zsh/themes/)
 export ZSH_THEME="josh"
-# oh-my-zsh still: do not check for upgrade by default, it's fucking annoying !
+# oh-my-zsh still: do not check for upgrade by default, it's freaking annoying !
 export DISABLE_AUTO_UPDATE="true"
 # Which plugins would you like to load? (plugins can be found in ~/.oh-my-zsh/plugins/*)
-plugins=(git history-substring-search bundler z rbenv docker ssh-agent)
+plugins=(git history-substring-search bundler z rbenv docker)
 source $ZSH/oh-my-zsh.sh
-
-# load id_rsa key
-zstyle :omz:plugins:ssh-agent identities id_rsa
 
 # autocomplete commands will include .hidden files
 setopt glob_dots
