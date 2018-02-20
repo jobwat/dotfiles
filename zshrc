@@ -51,7 +51,7 @@ export ZSH_THEME="josh"
 # oh-my-zsh still: do not check for upgrade by default, it's freaking annoying !
 export DISABLE_AUTO_UPDATE="true"
 # Which plugins would you like to load? (plugins can be found in ~/.oh-my-zsh/plugins/*)
-plugins=(git history-substring-search bundler z rbenv docker)
+plugins=(git z docker rbenv)
 source $ZSH/oh-my-zsh.sh
 
 # autocomplete commands will include .hidden files
@@ -75,6 +75,7 @@ cat ~/.dotfiles-msg | sed 's/^/[~\/.dotfiles-msg] /'
 # load FZF fuzzy matcher
 export FZF_DEFAULT_OPTS="--exact"
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
+
 # change z to use fzf if used without parameter
 unalias z 2> /dev/null
 z() {
