@@ -1,3 +1,4 @@
 [submodule "oh-my-zsh"]
 	path = oh-my-zsh
+	ignore = dirty
 	url = https://github.com/robbyrussell/oh-my-zsh.git
