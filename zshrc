@@ -53,6 +53,11 @@ export DISABLE_AUTO_UPDATE="true"
 plugins=(git z docker rbenv)
 source $ZSH/oh-my-zsh.sh
 
+# update josh theme prompt slightly
+PROMPT='
+%n@%m $(josh_prompt)
+%(?,%{%F{green}%},%{%F{red}%})$%{$reset_color%} '
+
 # autocomplete commands will include .hidden files
 setopt glob_dots
 
