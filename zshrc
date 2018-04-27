@@ -1,8 +1,7 @@
 # Quit unless interactive session
 [ -z "$PS1" ] && return
 
-unamestr=`uname`
-if [[ "$unamestr" =~ 'Darwin' ]]; then
+if [[ `uname` =~ 'Darwin' ]]; then
   # MacOS
 
   # Keypad from USB keyboard needs help under zsh since Yosemite (10.10) update
