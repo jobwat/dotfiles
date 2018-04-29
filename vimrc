@@ -135,9 +135,6 @@ nnoremap K :Ag <C-R><C-W><CR>
 " mapping to change the working directory to the current file path
 nnoremap ,cd :lcd %:p:h<CR>
 
-" set up go - https://github.com/golang/lint#vim
-set rtp+=$GOPATH/src/github.com/golang/lint/misc/vim
-
 " associate specific extensions with specific filetypes
 autocmd BufRead,BufNewFile *.es6 set filetype=javascript
 autocmd BufRead,BufNewFile *.rc set filetype=sh
@@ -146,7 +143,6 @@ autocmd BufRead,BufNewFile *.hamlc,*.hamstache set filetype=haml
 autocmd BufRead,BufNewFile *.template,*.json set filetype=json foldmethod=syntax
 let g:vim_json_syntax_conceal = 0 " specific to vim-json plugin (to keep the double quotes visible)
 autocmd BufRead,BufNewFile *.css,*.scss,*.less setlocal foldmethod=marker foldmarker={,}
-autocmd BufWritePost,FileWritePost *.go execute 'Lint' | cwindow
 
 " Fugitive setups -  http://vimcasts.org/episodes/fugitive-vim-browsing-the-git-object-database/
 " Auto-clean fugitive buffers
