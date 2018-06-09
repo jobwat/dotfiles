@@ -22,7 +22,7 @@ fi
 alias agu='ag -U'
 
 # tmux re-attach made easy
-alias tm='tmux list-sessions && tmux attach || tmux'
+alias tm='tmux list-sessions && tmux attach || TERM=screen-256color-bce tmux'
 
 # I'm way too used to autojump `j`
 alias j=z
