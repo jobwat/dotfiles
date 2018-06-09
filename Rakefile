@@ -45,6 +45,9 @@ task :install, [:replace_all] do |t, args|
   system %Q{git clone --depth 1 https://github.com/junegunn/fzf.git ~/.fzf}
   system %Q{~/.fzf/install}
 
+  # install dotfiles checker on crontab
+  update_crontab("check_dotfiles_repo", "# Check dotfiles twice a week\n3 2 * * 2,5 $HOME/.bin/check_dotfiles_repo > $HOME/.dotfiles-msg 2>&1")
+
 end
 
 task :update do
@@ -52,6 +55,18 @@ task :update do
 
   # update vim's plugins
   update_plugins
+end
+
+def update_crontab(regex, new_lines)
+  crontab = `crontab -l`
+  unless crontab.match regex
+    require 'tempfile'
+    file = Tempfile.new('foo')
+    file.write crontab + '
+' + new_lines
+    file.close
+    system %Q{crontab #{file.path}}
+  end
 end
 
 def update_plugins
