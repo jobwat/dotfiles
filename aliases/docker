@@ -65,3 +65,9 @@ de() {
 }
 
 alias dr='source ~/.docker.rc && env | grep -i dock'
+
+# List volumes
+alias dlv='docker volume ls'
+
+# List volume with their eventual associated containers
+alias dlvc='docker volume ls -q | while read i; do echo "Vol $i"; docker ps --filter=volume=$i; echo ; done'
