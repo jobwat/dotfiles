@@ -10,14 +10,13 @@ call plug#begin('~/.vim/plugged')
 " syntax plugins
 Plug 'tpope/vim-markdown', { 'for':  'markdown' }
 Plug 'tpope/vim-haml', { 'for':  'haml' }
-Plug 'fatih/vim-go', { 'do': ':GoInstallBinaries' }
+Plug 'fatih/vim-go', { 'do': ':GoInstallBinaries', 'for':  'go' }
 Plug 'elzr/vim-json', { 'for':  'json' }
 Plug 'vim-ruby/vim-ruby', { 'for':  'ruby' }
 Plug 'kchmck/vim-coffee-script', { 'for':  'coffee' }
 Plug 'moll/vim-node', { 'for':  'node' }
 Plug 'chase/vim-ansible-yaml', { 'for':  'yml' }
 Plug 'chr4/nginx.vim', { 'for':  'nginx.conf' }
-Plug 'fatih/vim-go', { 'for':  'go' }
 Plug 'hashivim/vim-terraform', { 'for':  'tf' }
 " fold plugins
 Plug 'nelstrom/vim-markdown-folding', { 'for':  'markdown' }
@@ -141,7 +140,6 @@ nnoremap ,cd :lcd %:p:h<CR>
 autocmd BufRead,BufNewFile *.es6 set filetype=javascript
 autocmd BufRead,BufNewFile *.rc set filetype=sh
 autocmd BufRead,BufNewFile *.go set nolist
-autocmd BufWritePost *.go :GoLint
 autocmd BufWritePost *_test.go :GoTest
 autocmd BufRead,BufNewFile *.hamlc,*.hamstache set filetype=haml
 autocmd BufRead,BufNewFile *.template,*.json set filetype=json foldmethod=syntax
