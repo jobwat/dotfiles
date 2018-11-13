@@ -41,10 +41,10 @@ alias drmf='docker stop $(docker ps -a -q) && docker rm $(docker ps -a -q)'
 drmi() { [[ -n $1 ]] && docker rmi $@ || docker rmi $(docker images -q); }
 
 # Remove untagged images (previous versions)
-alias drmuntagged='docker rmi $(docker images | grep "^<none>" | awk "{print $4}")'
+alias drmuntaggedimages='docker rmi $(docker images | grep "^<none>" | awk "{print $4}")'
 
 # Remove dangling images - https://stackoverflow.com/questions/32723111/how-to-remove-old-and-unused-docker-images
-alias drmdangled='docker rmi $(docker images --filter "dangling=true" -q --no-trunc)'
+alias drmdanglingimages='docker rmi $(docker images --filter "dangling=true" -q --no-trunc)'
 
 # All in one cleanups - Removed exited containers and dangling images
 dcleanup(){
@@ -71,3 +71,6 @@ alias dlv='docker volume ls'
 
 # List volume with their eventual associated containers
 alias dlvc='docker volume ls -q | while read i; do echo "Vol $i"; docker ps --filter=volume=$i; echo ; done'
+
+# Remove dangling volumes
+alias drmdanglingvolumes='docker volume ls -qf dangling=true | xargs -r docker volume rm'
