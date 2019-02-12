@@ -255,3 +255,33 @@ let g:ruby_heredoc_syntax_filetypes = {
         \   "start" : "XML",
         \},
   \}
+
+" Base64 Encode/Decode functions and mappings
+" Thanks https://stackoverflow.com/questions/26124424/sending-visual-selection-to-external-program-without-affecting-the-buffer
+function! Base64enc() range
+    " get selection in register n
+    silent! normal gv"ny
+    " base64 encode register n in var base64_string
+    let base64_string = system('base64', @n)
+    " Remove newlines spaces
+    let base64_string = substitute(base64_string,'\n','','g')
+    " Remove trailing spaces
+    let base64_string = substitute(base64_string,' $','','g')
+    " set the register n with base64_string
+    let @n = base64_string
+    " replace selection with register n
+    normal! gv"npgv
+endfunction
+function! Base64dec() range
+    " get selection in register n
+    silent! normal gv"ny
+    " base64 decode register n into decoded_string var
+    let decoded_string = system('base64 --decode', @n)
+    " set the register n with decoded_string
+    let @n = decoded_string
+    " replace selection with register n
+    normal! gv"npgv
+endfunction
+xnoremap <leader>e :call Base64enc()<CR>
+xnoremap <leader>d :call Base64dec()<CR>
+
