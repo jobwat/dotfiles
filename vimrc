@@ -134,7 +134,7 @@ endif
 nnoremap K :Ag <C-R><C-W><CR>
 
 " mapping to change the working directory to the current file path
-nnoremap ,cd :lcd %:p:h<CR>
+nnoremap <leader>cd :lcd %:p:h<CR>
 
 " associate specific extensions with specific filetypes
 autocmd BufRead,BufNewFile *.es6 set filetype=javascript
