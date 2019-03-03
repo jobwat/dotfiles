@@ -40,6 +40,8 @@ Plug 'rking/ag.vim' " silversearcher via :Ag
 Plug 'bogado/file-line' "open file at line :line
 Plug 'junegunn/goyo.vim' " distraction free writing
 "Plug 'junegunn/limelight.vim' " Hyperfocus via paragraph contrast - nice to demo code
+Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' } " NOT WORKING NICELY WITH MACVIM... :(
+Plug 'junegunn/fzf.vim'
 if has('mac')
   Plug 'junegunn/vim-xmark' " render Markdown in broswer
 endif
