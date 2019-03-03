@@ -24,24 +24,22 @@ Plug 'nelstrom/vim-markdown-folding', { 'for':  'markdown' }
 Plug 'jobwat/vim-railscasts-theme'
 Plug 'vim-scripts/vibrantink'
 " toys
-Plug 'scrooloose/nerdtree', { 'on':  'NERDTreeToggle' }
-Plug 'GutenYe/json5.vim', { 'for':  'json5' }
+"Plug 'scrooloose/nerdtree', { 'on':  'NERDTreeToggle' } " Will I miss this ?
 Plug 'scrooloose/nerdcommenter'
 Plug 'vimtaku/hl_matchit.vim' "enable easy jumps from/to matching bracket/tag
-Plug 'dterei/VimBookmarking', { 'on': [] }
 Plug 'tpope/vim-surround' "surrounding words, motion, selection with quotes or tags
 Plug 'vim-scripts/upAndDown'
 Plug 'Townk/vim-autoclose' "auto-close brackets for you !
 Plug 'tsaleh/vim-align'
-Plug 'godlygeek/tabular'
 Plug 'ctrlpvim/ctrlp.vim' " FuzzySearch in tree
+"Plug 'godlygeek/tabular' " Do I ever use that?
 Plug 'tpope/vim-fugitive' "embedded git
 Plug 'tpope/vim-rhubarb' "enable github page browse through vim-fugitive & hub
 Plug 'tpope/vim-unimpaired' "magic ]q jumps
 Plug 'rking/ag.vim' " silversearcher via :Ag
 Plug 'bogado/file-line' "open file at line :line
 Plug 'junegunn/goyo.vim' " distraction free writing
-Plug 'junegunn/limelight.vim' " Hyperfocus via paragraph contrast - nice to demo code
+"Plug 'junegunn/limelight.vim' " Hyperfocus via paragraph contrast - nice to demo code
 if has('mac')
   Plug 'junegunn/vim-xmark' " render Markdown in broswer
 endif
