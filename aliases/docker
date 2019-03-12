@@ -32,7 +32,7 @@ dstop() { [[ -n $1 ]] && docker stop $@ || docker stop $(docker ps -a -q);}
 drm() { [[ -n $1 ]] && docker rm $@ || docker rm $(docker ps -a -q); }
 
 # Remove all 'exited' containers
-alias drmae='docker rm $(docker ps -qa --no-trunc --filter "status=exited")'
+alias drm_exited_containers='docker rm $(docker ps -qa --no-trunc --filter "status=exited")'
 
 # Stop and Remove all containers
 alias drmf='docker stop $(docker ps -a -q) && docker rm $(docker ps -a -q)'
@@ -40,20 +40,8 @@ alias drmf='docker stop $(docker ps -a -q) && docker rm $(docker ps -a -q)'
 # Remove images or all image
 drmi() { [[ -n $1 ]] && docker rmi $@ || docker rmi $(docker images -q); }
 
-# Remove untagged images (previous versions)
-alias drmuntaggedimages='docker rmi $(docker images | grep "^<none>" | awk "{print $4}")'
-
-# Remove dangling images - https://stackoverflow.com/questions/32723111/how-to-remove-old-and-unused-docker-images
-alias drmdanglingimages='docker rmi $(docker images --filter "dangling=true" -q --no-trunc)'
-
-# All in one cleanups - Removed exited containers and dangling images
-dcleanup(){
-    docker rm -v $(docker ps --filter status=exited -q 2>/dev/null) 2>/dev/null
-    docker rmi $(docker images --filter dangling=true -q 2>/dev/null) 2>/dev/null
-}
-
-# Dockerfile build, e.g., $dbu tcnksm/test
-dbu() { docker build -t=$1 .; }
+# Remove dangling images - https://docs.docker.com/engine/reference/commandline/images/#show-untagged-images-dangling
+alias drmdanglingimages='docker rmi $(docker images -f "dangling=true" -q)'
 
 # Show all alias related docker
 dalias() { alias | grep 'docker' | sed "s/^\([^=]*\)=\(.*\)/\1 => \2/"| sed "s/['|\']//g" | sort;}

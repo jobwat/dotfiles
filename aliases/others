@@ -35,3 +35,6 @@ alias reload='source ~/.zshrc'
 
 # Ruby bundle exec
 alias be='bundle exec'
+
+# Make `watch` working with aliases - https://unix.stackexchange.com/questions/25327/watch-command-alias-expansion
+alias watch='watch '
