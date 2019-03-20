@@ -62,3 +62,6 @@ alias dlvc='docker volume ls -q | while read i; do echo "Vol $i"; docker ps --fi
 
 # Remove dangling volumes
 alias drmdanglingvolumes='docker volume ls -qf dangling=true | xargs -r docker volume rm'
+
+# Remove selected images
+alias drmSelectedImages='docker images --format "{{.Repository}}:{{.Tag}}" | fzf -m | xargs docker rmi'
