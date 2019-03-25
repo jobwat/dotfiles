@@ -80,6 +80,11 @@ cat ~/.dotfiles-msg | sed 's/^/[~\/.dotfiles-msg] /'
 export FZF_DEFAULT_OPTS="--exact"
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
 
+# other fzf hacks - thx http://owen.cymru/fzf-ripgrep-navigate-with-bash-faster-than-ever-before/
+function _mvim_fzf() { mvim $(fzf) }
+zle -N _mvim_fzf
+bindkey '^p' _mvim_fzf
+
 # change z to use fzf if used without parameter
 unalias z 2> /dev/null
 z() {
