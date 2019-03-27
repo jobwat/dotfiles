@@ -80,9 +80,6 @@ else
   nmap <leader>P :!echo "%:p" \|xsel -ib<CR><CR>
 endif
 
-" :Ack/Ag configuration
-let g:ackprg="ack -H --nocolor --nogroup --column --ignore-dir log --ignore-dir tmp --ignore-dir .sass-cache --ignore-dir build"
-
 " notepad++ style bookmarks (nobody's perfect) -- bookmarking plugin
 :map 22 :ToggleBookmark<CR>
 :map <C-2> :NextBookmark<CR>
@@ -126,14 +123,13 @@ set noerrorbells         " don't beep
 
 " Setup some specifics for CtrlP
 let g:ctrlp_cmd = 'CtrlPMixed'
+let g:ctrlp_user_command = ['.git/', 'git --git-dir=%s/.git ls-files -oc --exclude-standard']
 if executable('ag')
   let g:ctrlp_user_command = 'ag %s -l --nocolor -g ""'
 endif
 
-" Shift-K searchs with ag
-nnoremap K :Ag <C-R><C-W><CR>
 
-" mapping to change the working directory to the current file path
+" mapping to change vim working directory to the current file path
 nnoremap <leader>cd :lcd %:p:h<CR>
 
 " associate specific extensions with specific filetypes
