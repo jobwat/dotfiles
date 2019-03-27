@@ -159,6 +159,9 @@ autocmd BufWritePre * :RemoveTrailingSpaces
 " Remove trailing spaces -- https://stackoverflow.com/questions/356126/how-can-you-automatically-remove-trailing-whitespace-in-vim
 command! RemoveTrailingSpaces :%s/\s\+$//e
 
+" Flip the files (handy for some logs)
+command! ReverseLinesOrder :g/^/m0
+
 " DoPrettyXML beautifies an XML buffer (XML must be valid)
 function! DoPrettyXML()
   " save the filetype so we can restore it later
