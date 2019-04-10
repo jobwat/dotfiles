@@ -42,6 +42,7 @@ if [[ `uname` =~ 'Darwin' ]]; then
 fi
 
 export EDITOR="vim"
+export SAVEHIST=50000
 
 # oh-my-zsh configuration
 export ZSH=$HOME/.oh-my-zsh
