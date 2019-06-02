@@ -8,6 +8,16 @@ namespace :install do
     puts "Updating crontab..."
     update_crontab("check_dotfiles_repo", "# Check dotfiles twice a week\n3 2 * * 2,5 $HOME/.bin/check_dotfiles_repo > $HOME/.dotfiles-msg 2>&1")
   end
+
+  desc "Install github.com/rupa/z autojumper"
+  task :z do |t, args|
+    puts "Install github.com/rupa/z"
+    if `uname`.match(/darwin/i)
+      system("brew update && brew install z")
+    else
+      system("wget https://raw.githubusercontent.com/rupa/z/master/z.sh -O ~/z.sh")
+    end
+  end
 end
 
 desc "install the dot files into user's home directory"
@@ -56,6 +66,9 @@ task :install, [:replace_all] do |t, args|
 
   # Update crontab
   Rake::Task["install:crontab"].invoke
+
+  # Install z
+  Rake::Task["install:z"].invoke
 
 end
 
