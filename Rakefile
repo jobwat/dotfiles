@@ -1,6 +1,15 @@
 require 'rake'
 require 'erb'
 
+namespace :install do
+  desc "Update crontab with classics"
+  task :crontab do |t, args|
+    # install dotfiles checker
+    puts "Updating crontab..."
+    update_crontab("check_dotfiles_repo", "# Check dotfiles twice a week\n3 2 * * 2,5 $HOME/.bin/check_dotfiles_repo > $HOME/.dotfiles-msg 2>&1")
+  end
+end
+
 desc "install the dot files into user's home directory"
 task :install, [:replace_all] do |t, args|
   replace_all = !!args[:replace_all] || false
@@ -45,8 +54,8 @@ task :install, [:replace_all] do |t, args|
   system %Q{git clone --depth 1 https://github.com/junegunn/fzf.git ~/.fzf}
   system %Q{~/.fzf/install}
 
-  # install dotfiles checker on crontab
-  update_crontab("check_dotfiles_repo", "# Check dotfiles twice a week\n3 2 * * 2,5 $HOME/.bin/check_dotfiles_repo > $HOME/.dotfiles-msg 2>&1")
+  # Update crontab
+  Rake::Task["install:crontab"].invoke
 
 end
 
@@ -55,17 +64,23 @@ task :update do
 
   # update vim's plugins
   update_plugins
+
+  # Update crontab
+  Rake::Task["install:crontab"].invoke
 end
 
 def update_crontab(regex, new_lines)
   crontab = `crontab -l`
-  unless crontab.match regex
     require 'tempfile'
-    file = Tempfile.new('foo')
-    file.write crontab + '
-' + new_lines
-    file.close
-    system %Q{crontab #{file.path}}
+  unless crontab.match regex
+    tmpfilepath = Tempfile.new('foo').path
+    open(tmpfilepath, 'a'){ |f|
+      f << crontab unless crontab.empty?
+      f << "\n" unless crontab.empty?
+      f << new_lines.chomp
+      f << "\n"
+    }
+    system %Q{crontab #{tmpfilepath}}
   end
 end
 
