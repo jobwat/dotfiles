@@ -18,6 +18,7 @@ Plug 'moll/vim-node', { 'for':  'node' }
 Plug 'chase/vim-ansible-yaml', { 'for':  'yml' }
 Plug 'chr4/nginx.vim', { 'for':  'nginx.conf' }
 Plug 'hashivim/vim-terraform', { 'for':  'tf' }
+Plug 'tpope/vim-rails'
 " fold plugins
 Plug 'nelstrom/vim-markdown-folding', { 'for':  'markdown' }
 " theme plugins
@@ -26,11 +27,12 @@ Plug 'vim-scripts/vibrantink'
 " toys
 "Plug 'scrooloose/nerdtree', { 'on':  'NERDTreeToggle' } " Will I miss this ?
 Plug 'scrooloose/nerdcommenter'
-Plug 'vimtaku/hl_matchit.vim' "enable easy jumps from/to matching bracket/tag
+Plug 'vim-scripts/matchit.zip' "enable easy jumps from/to matching bracket/tag
 Plug 'tpope/vim-surround' "surrounding words, motion, selection with quotes or tags
 Plug 'vim-scripts/upAndDown'
 Plug 'Townk/vim-autoclose' "auto-close brackets for you !
 Plug 'tsaleh/vim-align'
+Plug 'tpope/vim-abolish' "few Pope's toys, including the `Coercion` one `crc`, `crs`, `cr-`.. etc
 Plug 'ctrlpvim/ctrlp.vim' " FuzzySearch in tree
 "Plug 'godlygeek/tabular' " Do I ever use that?
 Plug 'tpope/vim-fugitive' "embedded git
