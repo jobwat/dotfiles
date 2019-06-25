@@ -140,7 +140,8 @@ autocmd BufRead,BufNewFile *.rc set filetype=sh
 autocmd BufRead,BufNewFile *.go set nolist
 autocmd BufWritePost *_test.go :GoTest
 autocmd BufRead,BufNewFile *.hamlc,*.hamstache set filetype=haml
-autocmd BufRead,BufNewFile *.template,*.json set filetype=json foldmethod=syntax
+autocmd BufRead,BufNewFile *.json.template,*.json set filetype=json foldmethod=syntax
+autocmd BufRead,BufNewFile *.yaml.template,*.yml.template set filetype=yaml foldmethod=syntax
 let g:vim_json_syntax_conceal = 0 " specific to vim-json plugin (to keep the double quotes visible)
 autocmd BufRead,BufNewFile *.css,*.scss,*.less setlocal foldmethod=marker foldmarker={,}
 
@@ -243,8 +244,8 @@ command! W w
 command! Ex Explore
 " Why not just E for Explore
 command! E Ex
-" And just V for Vertical-Explore
-command! V Vex
+" And just Ve for Vertical-Explore
+command! Ve Vex
 
 " Show/Hide special characters (can't remember the 'list' toggle)
 command! ShowSpecialCharacters set list
