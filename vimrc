@@ -25,7 +25,7 @@ Plug 'nelstrom/vim-markdown-folding', { 'for':  'markdown' }
 Plug 'jobwat/vim-railscasts-theme'
 Plug 'vim-scripts/vibrantink'
 " toys
-"Plug 'scrooloose/nerdtree', { 'on':  'NERDTreeToggle' } " Will I miss this ?
+Plug 'scrooloose/nerdtree', { 'on':  'NERDTreeToggle' } " Will I miss this ?
 Plug 'scrooloose/nerdcommenter'
 Plug 'vim-scripts/matchit.zip' "enable easy jumps from/to matching bracket/tag
 Plug 'tpope/vim-surround' "surrounding words, motion, selection with quotes or tags
