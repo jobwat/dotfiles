@@ -244,7 +244,8 @@ command! W w
 command! Ex Explore
 " Why not just E for Explore
 command! E Ex
-" And just Ve for Vertical-Explore
+" And just Se and Ve for Split-Explore & Vertical-Explore
+command! Se Sex
 command! Ve Vex
 
 " Show/Hide special characters (can't remember the 'list' toggle)
