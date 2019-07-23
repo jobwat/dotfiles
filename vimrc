@@ -151,12 +151,16 @@ autocmd BufReadPost fugitive://* set bufhidden=delete
 
 " Auto-clean spaces
 autocmd BufWritePre * :RemoveTrailingSpaces
+autocmd BufWritePre * :RemoveTrailingEmptyLine
 
 
 " -- some functions --
 
 " Remove trailing spaces -- https://stackoverflow.com/questions/356126/how-can-you-automatically-remove-trailing-whitespace-in-vim
 command! RemoveTrailingSpaces :%s/\s\+$//e
+
+" Remove trailing empty line -- https://stackoverflow.com/questions/7495932/how-can-i-trim-blank-lines-at-the-end-of-file-in-vim
+command! RemoveTrailingEmptyLine :silent! :%s#\($\n\s*\)\+\%$##
 
 " Flip the files (handy for some logs)
 command! ReverseLinesOrder :g/^/m0
@@ -287,4 +291,3 @@ function! Base64dec() range
 endfunction
 xnoremap <leader>e :call Base64enc()<CR>
 xnoremap <leader>d :call Base64dec()<CR>
-
