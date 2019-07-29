@@ -41,7 +41,6 @@ Plug 'tpope/vim-unimpaired' "magic ]q jumps
 Plug 'rking/ag.vim' " silversearcher via :Ag
 Plug 'bogado/file-line' "open file at line :line
 Plug 'junegunn/goyo.vim' " distraction free writing
-"Plug 'junegunn/limelight.vim' " Hyperfocus via paragraph contrast - nice to demo code
 Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' } " NOT WORKING NICELY WITH MACVIM... :(
 Plug 'junegunn/fzf.vim'
 if has('mac')
@@ -81,11 +80,6 @@ else
   nmap <leader>p :!echo "%:." \|xsel -ib<CR><CR>
   nmap <leader>P :!echo "%:p" \|xsel -ib<CR><CR>
 endif
-
-" notepad++ style bookmarks (nobody's perfect) -- bookmarking plugin
-:map 22 :ToggleBookmark<CR>
-:map <C-2> :NextBookmark<CR>
-:map <C-@> :PreviousBookmark<CR>
 
 " mapping over the wonderful surround.vim plugin -- thx Tim
 :vmap "" S"
