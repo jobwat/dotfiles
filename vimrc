@@ -33,7 +33,6 @@ Plug 'vim-scripts/upAndDown'
 Plug 'Townk/vim-autoclose' "auto-close brackets for you !
 Plug 'tsaleh/vim-align'
 Plug 'tpope/vim-abolish' "few Pope's toys, including the `Coercion` one `crc`, `crs`, `cr-`.. etc
-Plug 'ctrlpvim/ctrlp.vim' " FuzzySearch in tree
 "Plug 'godlygeek/tabular' " Do I ever use that?
 Plug 'tpope/vim-fugitive' "embedded git
 Plug 'tpope/vim-rhubarb' "enable github page browse through vim-fugitive & hub
@@ -41,7 +40,7 @@ Plug 'tpope/vim-unimpaired' "magic ]q jumps
 Plug 'rking/ag.vim' " silversearcher via :Ag
 Plug 'bogado/file-line' "open file at line :line
 Plug 'junegunn/goyo.vim' " distraction free writing
-Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' } " NOT WORKING NICELY WITH MACVIM... :(
+Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' } " the amazing fuzzy file search
 Plug 'junegunn/fzf.vim'
 if has('mac')
   Plug 'junegunn/vim-xmark' " render Markdown in broswer
@@ -117,16 +116,12 @@ set title                " change the terminal's title
 set visualbell           " don't beep
 set noerrorbells         " don't beep
 
-" Setup some specifics for CtrlP
-let g:ctrlp_cmd = 'CtrlPMixed'
-let g:ctrlp_user_command = ['.git/', 'git --git-dir=%s/.git ls-files -oc --exclude-standard']
-if executable('ag')
-  let g:ctrlp_user_command = 'ag %s -l --nocolor -g ""'
-endif
-
 
 " mapping to change vim working directory to the current file path
 nnoremap <leader>cd :lcd %:p:h<CR>
+
+" mapping Ctrl-P to FZF
+nnoremap <c-p> :FZF<CR>
 
 " associate specific extensions with specific filetypes
 autocmd BufRead,BufNewFile *.es6 set filetype=javascript
