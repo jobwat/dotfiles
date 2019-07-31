@@ -3,7 +3,7 @@
 # note: few of the following need `current_branch` to give the current branch - see function sample here https://github.com/robbyrussell/oh-my-zsh/blob/291e96dcd034750fbe7473482508c08833b168e3/lib/git.zsh#L65
 
 # git-rebase aliases -- http://notes.envato.com/developers/rebasing-merge-commits-in-git/ -- thanks Glen's @ envato.com
-alias grb='git rebase -p'
+alias grb='git rebase --rebase-merges'
 alias gpush='git push origin $(current_branch)'
 alias gpull='git fetch origin --tags && grb origin/$(current_branch)'
 alias gm='git merge'
