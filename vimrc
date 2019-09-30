@@ -37,7 +37,7 @@ Plug 'tpope/vim-abolish' "few Pope's toys, including the `Coercion` one `crc`, `
 Plug 'tpope/vim-fugitive' "embedded git
 Plug 'tpope/vim-rhubarb' "enable github page browse through vim-fugitive & hub
 Plug 'tpope/vim-unimpaired' "magic ]q jumps
-Plug 'rking/ag.vim' " silversearcher via :Ag
+Plug 'mileszs/ack.vim' " silversearcher via ack.vim
 Plug 'bogado/file-line' "open file at line :line
 Plug 'junegunn/goyo.vim' " distraction free writing
 Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' } " the amazing fuzzy file search
@@ -226,6 +226,13 @@ endfunction
 com! Rm call DeleteFile()
 "delete the file and quit the buffer (quits vim if this was the last file)
 com! RM call DeleteFile() <Bar> q!
+
+" silver-searcher `ag` command through the ack.vim plugin - https://github.com/rking/ag.vim/issues/124#issuecomment-227038003
+let g:ackprg = 'ag --vimgrep --smart-case'
+cnoreabbrev ag Ack
+cnoreabbrev aG Ack
+cnoreabbrev Ag Ack
+cnoreabbrev AG Ack
 
 " -- Let's stay lazy ! --
 
