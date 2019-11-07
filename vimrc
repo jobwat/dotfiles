@@ -19,6 +19,7 @@ Plug 'chase/vim-ansible-yaml', { 'for':  'yml' }
 Plug 'chr4/nginx.vim', { 'for':  'nginx.conf' }
 Plug 'hashivim/vim-terraform', { 'for':  'tf' }
 Plug 'tpope/vim-rails'
+Plug 'arzg/vim-sh'
 " fold plugins
 Plug 'nelstrom/vim-markdown-folding', { 'for':  'markdown' }
 " theme plugins
