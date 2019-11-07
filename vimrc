@@ -287,3 +287,21 @@ function! Base64dec() range
 endfunction
 xnoremap <leader>e :call Base64enc()<CR>
 xnoremap <leader>d :call Base64dec()<CR>
+
+" set autoFmt at save
+let g:terraform_fmt_on_save=1
+
+" Clean a terraform file
+function! TerraformNeat() range
+  " ensure format set to tf
+  set ft=tf
+  " reload
+  e %
+  " remove empty lines
+  g/^$/d
+  " add line breaks after each resource block
+  %s/^}$/}/
+  " run fmt
+  TerraformFmt
+endfunction
+command! Tflint call TerraformNeat()
