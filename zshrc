@@ -37,7 +37,7 @@ if [[ `uname` =~ 'Darwin' ]]; then
     }
     chpwd
   }
-  export PATH=/usr/local/homebrew/bin:$PATH
+  export PATH=/usr/local/homebrew/sbin:/usr/local/homebrew/bin:$PATH
 
 fi
 
@@ -92,4 +92,3 @@ z() {
   [ $# -gt 0 ] && _z "$*" && return
   cd "$(_z -l 2>&1 | fzf-tmux +s --tac --query "$*" | sed 's/^[0-9,.]* *//')"
 }
-
