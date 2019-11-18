@@ -18,8 +18,10 @@ Plug 'moll/vim-node', { 'for':  'node' }
 Plug 'chase/vim-ansible-yaml', { 'for':  'yml' }
 Plug 'chr4/nginx.vim', { 'for':  'nginx.conf' }
 Plug 'hashivim/vim-terraform', { 'for':  'tf' }
-Plug 'tpope/vim-rails'
 Plug 'arzg/vim-sh'
+" ruby / rails plugins
+Plug 'tpope/vim-rails' " rails syntax and more
+Plug 'tpope/vim-endwise' " end certain structures automatically
 " fold plugins
 Plug 'nelstrom/vim-markdown-folding', { 'for':  'markdown' }
 " theme plugins
@@ -34,7 +36,9 @@ Plug 'vim-scripts/upAndDown'
 Plug 'Townk/vim-autoclose' "auto-close brackets for you !
 Plug 'tsaleh/vim-align'
 Plug 'tpope/vim-abolish' "few Pope's toys, including the `Coercion` one `crc`, `crs`, `cr-`.. etc
+Plug 'dense-analysis/ale' " linting
 "Plug 'godlygeek/tabular' " Do I ever use that?
+Plug 'jiangmiao/auto-pairs' " Insert or delete brackets, parenthesis, quotes in pair.
 Plug 'tpope/vim-fugitive' "embedded git
 Plug 'tpope/vim-rhubarb' "enable github page browse through vim-fugitive & hub
 Plug 'tpope/vim-unimpaired' "magic ]q jumps
@@ -44,7 +48,7 @@ Plug 'junegunn/goyo.vim' " distraction free writing
 Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' } " the amazing fuzzy file search
 Plug 'junegunn/fzf.vim'
 if has('mac')
-  Plug 'junegunn/vim-xmark' " render Markdown in broswer
+  Plug 'junegunn/vim-xmark' " render Markdown in browser
 endif
 call plug#end()
 
@@ -143,8 +147,38 @@ autocmd BufReadPost fugitive://* set bufhidden=delete
 autocmd BufWritePre * :RemoveTrailingSpaces
 autocmd BufWritePre * :RemoveTrailingEmptyLine
 
+let g:ale_linters = {
+      \   'ruby': ['standardrb', 'rubocop'],
+      \   'python': ['flake8', 'pylint'],
+      \   'javascript': ['eslint'],
+      \}
+
+let g:ale_fixers = {
+      \    'ruby': ['standardrb'],
+      \}
+let g:ale_fix_on_save = 1
 
 " -- some functions --
+
+" linting status in status bar - https://www.vimfromscratch.com/articles/vim-for-ruby-and-rails-in-2019/
+function! LinterStatus() abort
+  let l:counts = ale#statusline#Count(bufnr(''))
+
+  let l:all_errors = l:counts.error + l:counts.style_error
+  let l:all_non_errors = l:counts.total - l:all_errors
+
+  return l:counts.total == 0 ? '✨ all good ✨' : printf(
+        \   '😞 %dW %dE',
+        \   all_non_errors,
+        \   all_errors
+        \)
+endfunction
+
+set statusline=
+set statusline+=%m
+set statusline+=\ %f
+set statusline+=%=
+set statusline+=\ %{LinterStatus()}
 
 " Remove trailing spaces -- https://stackoverflow.com/questions/356126/how-can-you-automatically-remove-trailing-whitespace-in-vim
 command! RemoveTrailingSpaces :%s/\s\+$//e
