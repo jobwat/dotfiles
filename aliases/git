@@ -28,5 +28,11 @@ alias glgg='git log --graph --max-count=15'
 alias gdelete_merged='git branch -r --merged | grep "^origin/" | grep -vE "(>|master|feature)" | xargs -L1 | cut -d"/" -f2- | xargs git push origin --delete'
 
 # I'm using hub! it's amazing - `brew install hub`
-alias gbrowse='hub browse'
+function gbrowse(){
+  if [ -z $1 ]; then
+    hub browse
+  else
+    hub browse -- blob/$(current_branch)/$1
+  fi
+}
 alias gpr='hub pull-request --push --edit --file <(git log --oneline --format=%B -n 1 HEAD && [ -f .github/PULL_REQUEST_TEMPLATE.md ] && echo && cat .github/PULL_REQUEST_TEMPLATE.md)'
