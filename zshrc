@@ -37,8 +37,6 @@ if [[ `uname` =~ 'Darwin' ]]; then
     }
     chpwd
   }
-  export PATH=/usr/local/homebrew/sbin:/usr/local/homebrew/bin:$PATH
-
 fi
 
 export EDITOR="vim"

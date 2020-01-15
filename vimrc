@@ -37,8 +37,7 @@ Plug 'Townk/vim-autoclose' "auto-close brackets for you !
 Plug 'tsaleh/vim-align'
 Plug 'tpope/vim-abolish' "few Pope's toys, including the `Coercion` one `crc`, `crs`, `cr-`.. etc
 Plug 'dense-analysis/ale' " linting
-"Plug 'godlygeek/tabular' " Do I ever use that?
-Plug 'jiangmiao/auto-pairs' " Insert or delete brackets, parenthesis, quotes in pair.
+"Plug 'jiangmiao/auto-pairs' " Insert or delete brackets, parenthesis, quotes in pair.
 Plug 'tpope/vim-fugitive' "embedded git
 Plug 'tpope/vim-rhubarb' "enable github page browse through vim-fugitive & hub
 Plug 'tpope/vim-unimpaired' "magic ]q jumps
