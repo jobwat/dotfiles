@@ -77,6 +77,7 @@ cat ~/.dotfiles-msg | sed 's/^/[~\/.dotfiles-msg] /'
 
 # load FZF fuzzy matcher
 export FZF_DEFAULT_OPTS="--exact"
+export FZF_DEFAULT_COMMAND='ag -p ~/.ignore -g "" -f'
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
 
 # other fzf hacks - thx http://owen.cymru/fzf-ripgrep-navigate-with-bash-faster-than-ever-before/

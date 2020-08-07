@@ -43,4 +43,4 @@ alias watch='watch '
 alias rubit='git ls-files -m | xargs ls -1 2>/dev/null | grep '\.rb$' | xargs rubocop -a'
 
 # loadenv needs to be sourced to run in current
-which loadenv >/dev/null 2>&1 && unalias loadenv; alias loadenv="source `which loadenv`"
+which loadenv >/dev/null 2>&1 && unalias loadenv >/dev/null 2>&1; alias loadenv="source `which loadenv`"

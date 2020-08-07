@@ -36,7 +36,7 @@ Plug 'vim-scripts/upAndDown'
 Plug 'Townk/vim-autoclose' "auto-close brackets for you !
 Plug 'tsaleh/vim-align'
 Plug 'tpope/vim-abolish' "few Pope's toys, including the `Coercion` one `crc`, `crs`, `cr-`.. etc
-Plug 'dense-analysis/ale' " linting
+Plug 'dense-analysis/ale' " linting (use rubocop)
 "Plug 'jiangmiao/auto-pairs' " Insert or delete brackets, parenthesis, quotes in pair.
 Plug 'tpope/vim-fugitive' "embedded git
 Plug 'tpope/vim-rhubarb' "enable github page browse through vim-fugitive & hub
@@ -111,8 +111,7 @@ set showcmd  " display incomplete commands
 set incsearch  " do incremental searching
 set number    " display line numbers
 set showmatch  " show matching bracket
-set foldmethod=manual   " folding like a nerd
-set nofoldenable    " disable folding by default
+set foldlevelstart=99 " set entry folding to unfolded
 set laststatus=2 " Always display the status line
 set tabstop=2 shiftwidth=2 expandtab " tabs are converted into 2 spaces
 set wildignore=log/**,tmp/cache,BUILD/**,BUILDROOT/*,RPMS,SOURCES,*.xcodeproj/**,CordovaLib/**,www/**,*.png,*.gif,*.jpg,*.jpeg,*.ico " ignore some files (used by command-t plugin)
@@ -149,7 +148,8 @@ autocmd BufWritePre * :RemoveTrailingEmptyLine
 let g:ale_linters = {
       \   'ruby': ['standardrb', 'rubocop'],
       \   'python': ['flake8', 'pylint'],
-      \   'javascript': ['eslint'],
+      \   'javascript': ['eslint', 'prettier'],
+      \   'css': ['prettier'],
       \}
 
 let g:ale_fixers = {
@@ -339,3 +339,5 @@ function! TerraformNeat() range
   TerraformFmt
 endfunction
 command! Tflint call TerraformNeat()
+
+"command! rubyOldHashToNewHash() :%s/:\(\w\+\)\(\s*=>\s*\)/\1: /gc
