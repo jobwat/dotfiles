@@ -179,6 +179,9 @@ set statusline+=\ %f
 set statusline+=%=
 set statusline+=\ %{LinterStatus()}
 
+" Sort lines and spot duplicated ones -- https://stackoverflow.com/questions/1268032/how-can-i-mark-highlight-duplicate-lines-in-vi-editor/28690847#28690847
+command! DuplicatedLines :sort | g/^\(.*\)$\n\1$/p
+
 " Remove trailing spaces -- https://stackoverflow.com/questions/356126/how-can-you-automatically-remove-trailing-whitespace-in-vim
 command! RemoveTrailingSpaces :%s/\s\+$//e
 
