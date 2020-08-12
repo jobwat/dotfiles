@@ -9,20 +9,22 @@ namespace :install do
     update_crontab("check_dotfiles_repo", "# Check dotfiles twice a week\n3 2 * * 2,5 $HOME/.bin/check_dotfiles_repo > $HOME/.dotfiles-msg 2>&1")
   end
 
-  desc "Install github.com/rupa/z autojumper"
-  task :z do |t, args|
-    puts "Install github.com/rupa/z"
-    if `uname`.match(/darwin/i)
-      system("brew update && brew install z")
-    else
-      system("wget https://raw.githubusercontent.com/rupa/z/master/z.sh -O ~/z.sh")
-    end
+  desc "Install minimal brew packages"
+  task :brew_packages do |t, args|
+    puts "Ensure brew is installed"
+    system('brew -h >/dev/null 2>&1 || /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install.sh)"')
+    puts "Install brew"
+    system('cat brew.minimal.list | grep -v "^#" | xargs brew install')
   end
 end
 
 desc "install the dot files into user's home directory"
 task :install, [:replace_all] do |t, args|
   replace_all = !!args[:replace_all] || false
+
+  # Install minimal brew packages
+  Rake::Task["install:brew_packages"].invoke
+
   Dir['*'].each do |file|
 
     next if file =~ /^install_/
@@ -60,15 +62,8 @@ task :install, [:replace_all] do |t, args|
   # update vim's plugins
   update_plugins
 
-  # install fzf (fuzzy matcher)
-  system %Q{git clone --depth 1 https://github.com/junegunn/fzf.git ~/.fzf}
-  system %Q{~/.fzf/install}
-
   # Update crontab
   Rake::Task["install:crontab"].invoke
-
-  # Install z
-  Rake::Task["install:z"].invoke
 
 end
 
