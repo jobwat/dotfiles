@@ -7,7 +7,7 @@ if s:uname == "Darwin\n"
 
   " Do Mac stuff here
 
-  set guifont=Monaco:h12
+  set guifont=Monaco:h14
 
   " nathanaelkane/vim-command-w specific
   macmenu &File.Close key=<nop>
@@ -18,7 +18,7 @@ else
 
   " Do Linux Specifc here
   set tabstop=2 shiftwidth=2 expandtab " tabs are converted into 2 spaces
-  set guifont=Monospace\ 10
+  set guifont=Monospace\ 14
   colorscheme railscasts
 
   " forcing terminal style Copy/Paste shortcuts
@@ -59,6 +59,3 @@ else
   vmap <C-s> <Esc>:w<CR>gv
 
 endif
-
-map <leader>r <Esc>:set columns=255 lines=65<CR>
-
