@@ -5,10 +5,10 @@
 # git-rebase aliases -- http://notes.envato.com/developers/rebasing-merge-commits-in-git/ -- thanks Glen's @ envato.com
 alias grb='git rebase --rebase-merges'
 alias gpush='git push origin $(current_branch)'
-alias gpull='git fetch origin --tags && grb origin/$(current_branch)'
+alias gpull='git fetch origin && grb origin/$(current_branch)'
 alias gm='git merge'
 alias gpnp='gpull && gpush'
-alias gl='git pull --tags --prune origin $(current_branch)'
+alias gl='if [[ $(current_branch) = master ]]; then git pull --prune; else git pull origin $(current_branch); fi'
 alias gb='git --no-pager branch'
 
 # all in one super git stash and do - inspired from Dam5s aliases
