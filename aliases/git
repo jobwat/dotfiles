@@ -36,3 +36,8 @@ function gbrowse(){
   fi
 }
 alias gpr='hub pull-request --push --edit --file <(git log --oneline --format=%B -n 1 HEAD && [ -f .github/PULL_REQUEST_TEMPLATE.md ] && echo && cat .github/PULL_REQUEST_TEMPLATE.md)'
+
+function git_fuzzy_branch_picker(){
+  cat <(git --no-pager branch | grep -v '\*') <(git --no-pager branch -r) | fzf
+}
+alias gf='gco $(git_fuzzy_branch_picker)'
