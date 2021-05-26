@@ -28,22 +28,20 @@ Plug 'nelstrom/vim-markdown-folding', { 'for':  'markdown' }
 Plug 'jobwat/vim-railscasts-theme'
 Plug 'vim-scripts/vibrantink'
 " toys
-Plug 'scrooloose/nerdtree', { 'on':  'NERDTreeToggle' } " Will I miss this ?
-Plug 'scrooloose/nerdcommenter'
+Plug 'scrooloose/nerdcommenter' "toggle line comment with the same ,c shortcut whatever the language
 Plug 'vim-scripts/matchit.zip' "enable easy jumps from/to matching bracket/tag
 Plug 'tpope/vim-surround' "surrounding words, motion, selection with quotes or tags
-Plug 'vim-scripts/upAndDown'
+Plug 'vim-scripts/upAndDown' "move selected lines up/down with shift-arrows
 Plug 'Townk/vim-autoclose' "auto-close brackets for you !
-Plug 'tsaleh/vim-align'
-Plug 'tpope/vim-abolish' "few Pope's toys, including the `Coercion` one `crc`, `crs`, `cr-`.. etc
-Plug 'dense-analysis/ale' " linting (use rubocop)
+Plug 'tsaleh/vim-align' "helper to align things
+Plug 'tpope/vim-abolish' "few Time Pope's toys, including the `Coercion` one `crc`, `crs`, `cr-`.. etc
+Plug 'dense-analysis/ale' "linting (use rubocop)
 "Plug 'jiangmiao/auto-pairs' " Insert or delete brackets, parenthesis, quotes in pair.
-Plug 'tpope/vim-fugitive' "embedded git
+Plug 'tpope/vim-fugitive' "embedded git, the Tim Pope's way
 Plug 'tpope/vim-rhubarb' "enable github page browse through vim-fugitive & hub
 Plug 'tpope/vim-unimpaired' "magic ]q jumps
 Plug 'mileszs/ack.vim' " silversearcher via ack.vim
 Plug 'bogado/file-line' "open file at line :line
-Plug 'junegunn/goyo.vim' " distraction free writing
 Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' } " the amazing fuzzy file search
 Plug 'junegunn/fzf.vim'
 if has('mac')
@@ -225,6 +223,9 @@ command! BeautifyXML :call DoPrettyXML()
 command! BeautifyJSON :%!python -m json.tool
 command! PrettyJSON :BeautifyJSON
 
+command! PackJSON :%!jj -u
+command! RePackJSON :PackJSON
+
 " RePackXML de-beautify an XML buffer (compact style)
 function! RePackXML()
   " remove extra space at beginning of lines
@@ -344,3 +345,27 @@ endfunction
 command! Tflint call TerraformNeat()
 
 "command! rubyOldHashToNewHash() :%s/:\(\w\+\)\(\s*=>\s*\)/\1: /gc
+
+"https://stackoverflow.com/questions/1268032/how-can-i-mark-highlight-duplicate-lines-in-vi-editor
+function! HighlightRepeats() range
+  let lineCounts = {}
+  let lineNum = a:firstline
+  while lineNum <= a:lastline
+    let lineText = getline(lineNum)
+    if lineText != ""
+      let lineCounts[lineText] = (has_key(lineCounts, lineText) ? lineCounts[lineText] : 0) + 1
+    endif
+    let lineNum = lineNum + 1
+  endwhile
+  exe 'syn clear Repeat'
+  for lineText in keys(lineCounts)
+    if lineCounts[lineText] >= 2
+      exe 'syn match Repeat "^' . escape(lineText, '".\^$*[]') . '$"'
+    endif
+  endfor
+endfunction
+
+command! -range=% HighlightRepeats <line1>,<line2>call HighlightRepeats()
+
+" https://vi.stackexchange.com/questions/2280/how-to-show-only-matching-lines
+command! FoldAllButSearch setlocal foldexpr=getline(v:lnum)=~@/?0:1 foldmethod=expr
