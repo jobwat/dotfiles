@@ -7,7 +7,7 @@ if s:uname == "Darwin\n"
 
   " Do Mac stuff here
 
-  set guifont=Monaco:h14
+  set guifont=Monaco:h15
 
   " nathanaelkane/vim-command-w specific
   macmenu &File.Close key=<nop>
