@@ -95,8 +95,7 @@ z() {
 
 mvim(){
   if [ $# -gt 0 ]; then
-    ( [[ "$1" =~ "^[-/~]" ]] || [ -d $1 ] || [ -f $1 ] || [[ "$1" == "." ]] ) && /usr/local/bin/mvim "$*" && return
-    dir=$(_z -e "$*") && /usr/local/bin/mvim -c ":cd $dir" $dir && return
+    /usr/local/bin/mvim "$*" && return
   else
     dir="$(_z -l 2>&1 | fzf-tmux +s --tac --query "$*" | sed 's/^[0-9,.]* *//')"
     [ -n "$dir" ] && /usr/local/bin/mvim -c ":cd $dir" $dir
