@@ -9,12 +9,19 @@ namespace :install do
     update_crontab("check_dotfiles_repo", "# Check dotfiles twice a week\n3 2 * * 2,5 $HOME/.bin/check_dotfiles_repo > $HOME/.dotfiles-msg 2>&1")
   end
 
-  desc "Install minimal brew packages"
-  task :brew_packages do |t, args|
-    puts "Ensure brew is installed"
-    system('brew -h >/dev/null 2>&1 || /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install.sh)"')
-    puts "Install brew"
-    system('cat brew.minimal.list | grep -v "^#" | xargs brew install')
+  desc "Install minimal packages set"
+  task :packages do |t, args|
+    kernel=`uname`.chomp
+    puts "Kernel: #{kernel}"
+    if kernel == 'Linux'
+      puts "Install packages"
+      system('cat packages.list | grep -v -e "^#" -e "brew" | sed "s/ .*//" | xargs sudo apt-get install -y ')
+    else
+      puts "Ensure brew is installed"
+      system('brew -h >/dev/null 2>&1 || /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install.sh)"')
+      puts "Install packages"
+      system('cat packages.list | grep -v e "^#" -e "debian" | xargs brew install')
+    end
   end
 end
 
@@ -23,7 +30,7 @@ task :install, [:replace_all] do |t, args|
   replace_all = !!args[:replace_all] || false
 
   # Install minimal brew packages
-  Rake::Task["install:brew_packages"].invoke
+  Rake::Task["install:packages"].invoke
 
   Dir['*'].each do |file|
 

@@ -1,0 +1,30 @@
+ack
+coreutils # brew
+curl
+fzf
+git
+#git-cola
+git-gui
+gnu-sed # brew
+go # brew
+htop
+#hub
+#imagemagick
+jq
+lftp
+macvim # brew
+vim
+#nmap
+#node
+#nvm
+rbenv
+ruby-build
+shyaml # brew
+the_silver_searcher # brew
+silversearcher-ag # debian
+tmux
+watch
+wget
+yq # brew
+z # brew
+zsh
