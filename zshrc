@@ -41,6 +41,7 @@ fi
 
 export EDITOR="vim"
 export SAVEHIST=50000
+export PROMPT_EOL_MARK='' # remove the default % added by zsh when the output has no EndOfLine - https://unix.stackexchange.com/questions/167582/why-zsh-ends-a-line-with-a-highlighted-percent-symbol
 
 # oh-my-zsh configuration
 export ZSH=$HOME/.oh-my-zsh
