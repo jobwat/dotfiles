@@ -19,6 +19,7 @@ Plug 'chase/vim-ansible-yaml', { 'for':  'yml' }
 Plug 'chr4/nginx.vim', { 'for':  'nginx.conf' }
 Plug 'hashivim/vim-terraform', { 'for':  'tf' }
 Plug 'arzg/vim-sh'
+Plug 'towolf/vim-helm'
 " ruby / rails plugins
 Plug 'tpope/vim-rails' " rails syntax and more
 Plug 'tpope/vim-endwise' " end certain structures automatically
