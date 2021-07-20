@@ -40,12 +40,24 @@ alias gpr='hub pull-request --push --edit --file <(git log --oneline --format=%B
 
 # fuzzy search branch - Over-abuse of fzf :nearly-ashamed:
 function git_fuzzy_branch_picker(){
-  cat <(git --no-pager branch | grep -v '\*') <(git --no-pager branch -r) | fzf
+  cat <(git --no-pager branch | grep -v '\*') | fzf -m
 }
+
+# replace classic gco alias with function using fuzzy_branch_picker if no param
 function gco(){
   if [ -z $1 ]; then
     git checkout $(git_fuzzy_branch_picker)
   else
     git checkout $@
+  fi
+}
+
+# replace classic gbd alias with function using fuzzy_branch_picker if no param
+unalias gbd
+function gbd(){
+  if [ -z $1 ]; then
+    git branch -d $(git_fuzzy_branch_picker)
+  else
+    git branch -d $@
   fi
 }
