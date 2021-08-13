@@ -29,10 +29,14 @@ alias gdelete_merged='git branch -r --merged | grep "^origin/" | grep -vE "(>|ma
 
 # open github project directly - hub is amazing - `brew install hub`
 function gbrowse(){
-  if [ -z $1 ]; then
-    hub browse
+  if [ -n $1 ]; then
+    if [[ "$1" =~ \b[0-9a-f]{5,40}\b ]]; then
+      hub browse -- commit/$1
+    else
+      hub browse -- blob/$(current_branch)/$1
+    fi
   else
-    hub browse -- blob/$(current_branch)/$1
+    hub browse
   fi
 }
 # create github PR from the command line
@@ -56,8 +60,8 @@ function gco(){
 unalias gbd
 function gbd(){
   if [ -z $1 ]; then
-    git branch -d $(git_fuzzy_branch_picker)
+    git branch -D $(git_fuzzy_branch_picker)
   else
-    git branch -d $@
+    git branch -D $@
   fi
 }
