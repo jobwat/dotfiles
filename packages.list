@@ -14,7 +14,7 @@ iterm2 # brew
 jq
 lftp
 macvim # brew
-vim
+vim # debian
 #nmap
 #node
 #nvm
