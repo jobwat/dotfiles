@@ -20,7 +20,7 @@ namespace :install do
       puts "Ensure brew is installed"
       system('brew -h >/dev/null 2>&1 || /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install.sh)"')
       puts "Install packages"
-      system('cat packages.list | grep -v e "^#" -e "debian" | xargs brew install')
+      system('cat packages.list | grep -v -e "^#" -e "debian" | sed "s/#.*//" | xargs brew install')
     end
   end
 end
