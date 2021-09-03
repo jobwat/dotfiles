@@ -10,6 +10,7 @@ go # brew
 htop
 #hub
 #imagemagick
+iterm2 # brew
 jq
 lftp
 macvim # brew
