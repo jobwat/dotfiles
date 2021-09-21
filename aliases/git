@@ -2,14 +2,23 @@
 
 # note: few of the following need `current_branch` to give the current branch - see function sample here https://github.com/robbyrussell/oh-my-zsh/blob/291e96dcd034750fbe7473482508c08833b168e3/lib/git.zsh#L65
 
+function main_branch() {
+  git show-ref --verify --quiet refs/heads/main >/dev/null 2>&1 && echo "main" && return
+  git show-ref --verify --quiet refs/heads/master >/dev/null 2>&1 && echo "master" && return
+  echo "unknown"
+}
+
 # git-rebase aliases -- http://notes.envato.com/developers/rebasing-merge-commits-in-git/ -- thanks Glen's @ envato.com
 alias grb='git rebase --rebase-merges'
 alias gpush='git push origin $(current_branch)'
 alias gpull='git fetch origin && grb origin/$(current_branch)'
+
+# more aliases
 alias gm='git merge'
 alias gpnp='gpull && gpush'
-alias gl='if [[ $(current_branch) = master ]]; then git pull --prune; else git pull origin $(current_branch); fi'
+alias gl='if [[ $(current_branch) = $(main_branch) ]]; then git pull --prune; else git pull origin $(current_branch); fi'
 alias gb='git --no-pager branch'
+alias gcm='git checkout $(main_branch)'
 
 # all in one super git stash and do - inspired from Dam5s aliases
 alias gsl='git stash list'
@@ -18,14 +27,14 @@ alias gspnp='gspull && gpush'
 
 
 # some more advanced one (lazy people only) -- http://stackoverflow.com/questions/6127328
-alias gplb='git checkout master && git branch --merged | grep -v "\*" | xargs -n 1 git branch -d'
+alias gplb='git checkout $(main_branch) && git branch --merged | grep -v "\*" | xargs -n 1 git branch -d'
 
 # refine some other aliases from https://github.com/robbyrussell/oh-my-zsh/blob/master/plugins/git/git.plugin.zsh
 alias glg='git log --stat --max-count=15'
 alias glgg='git log --graph --max-count=15'
 
 # remove all merged branch from origin - thx https://gist.github.com/schacon/942899
-alias gdelete_merged='git branch -r --merged | grep "^origin/" | grep -vE "(>|master|feature)" | xargs -L1 | cut -d"/" -f2- | xargs git push origin --delete'
+alias gdelete_merged='git branch -r --merged | grep "^origin/" | grep -vE "(>|main|master|feature)" | xargs -L1 | cut -d"/" -f2- | xargs git push origin --delete'
 
 # open github project directly - hub is amazing - `brew install hub`
 function gbrowse(){
