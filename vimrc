@@ -32,7 +32,7 @@ Plug 'vim-scripts/vibrantink'
 Plug 'scrooloose/nerdcommenter' "toggle line comment with the same ,c shortcut whatever the language
 Plug 'vim-scripts/matchit.zip' "enable easy jumps from/to matching bracket/tag
 Plug 'tpope/vim-surround' "surrounding words, motion, selection with quotes or tags
-Plug 'vim-scripts/upAndDown' "move selected lines up/down with shift-arrows
+Plug 'vim-scripts/upAndDown' "move selected lines up/down with option-arrows (formerly with shift)
 Plug 'Townk/vim-autoclose' "auto-close brackets for you !
 Plug 'tsaleh/vim-align' "helper to align things
 Plug 'tpope/vim-abolish' "few Time Pope's toys, including the `Coercion` one `crc`, `crs`, `cr-`.. etc
@@ -86,6 +86,14 @@ endif
 " mapping over the wonderful surround.vim plugin -- thx Tim
 :vmap "" S"
 :vmap '' S'
+
+" map option-arrow to move lines up and down, to mimic VS Code comportment
+nmap <A-Up> <Plug>upAndDownUp
+nmap <A-Down> <Plug>upAndDownDown
+imap <A-Up> <Plug>upAndDownInsertUp
+imap <A-Down> <Plug>upAndDownInsertDown
+vmap <A-Up> <Plug>upAndDownVisualUp
+vmap <A-Down> <Plug>upAndDownVisualDown
 
 " set options
 set nocompatible " needed by some plugins
