@@ -66,7 +66,7 @@ function gco(){
 }
 
 # replace classic gbd alias with function using fuzzy_branch_picker if no param
-unalias gbd
+alias gdb >/dev/null 2>&1 && unalias gbd
 function gbd(){
   if [ -z $1 ]; then
     git branch -D $(git_fuzzy_branch_picker)
