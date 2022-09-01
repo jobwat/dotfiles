@@ -28,9 +28,6 @@ alias dki="docker run -i -t -P"
 # Stop all containers
 dstop() { [[ -n $1 ]] && docker stop $@ || docker stop $(docker ps -a -q);}
 
-# Remove container or all containers
-drm() { [[ -n $1 ]] && docker rm $@ || docker rm $(docker ps -a -q); }
-
 # Remove all 'exited' containers
 alias drm_exited_containers='docker rm $(docker ps -qa --no-trunc --filter "status=exited")'
 
