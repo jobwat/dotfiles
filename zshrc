@@ -77,7 +77,7 @@ alias_dir=${HOME}/.aliases; [ -d $alias_dir ] && for i in `ls $alias_dir`; do so
 cat ~/.dotfiles-msg | sed 's/^/[~\/.dotfiles-msg] /'
 
 # load FZF fuzzy matcher
-export FZF_DEFAULT_OPTS="--exact"
+export FZF_DEFAULT_OPTS="--exact --no-sort"
 export FZF_DEFAULT_COMMAND='ag -p ~/.ignore -g "" -f'
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
 
