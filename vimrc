@@ -88,12 +88,12 @@ endif
 :vmap '' S'
 
 " map option-arrow to move lines up and down, to mimic VS Code comportment
-nmap <A-Up> <Plug>upAndDownUp
-nmap <A-Down> <Plug>upAndDownDown
-imap <A-Up> <Plug>upAndDownInsertUp
-imap <A-Down> <Plug>upAndDownInsertDown
-vmap <A-Up> <Plug>upAndDownVisualUp
-vmap <A-Down> <Plug>upAndDownVisualDown
+nmap <M-Up> <Plug>upAndDownUp
+nmap <M-Down> <Plug>upAndDownDown
+imap <M-Up> <Plug>upAndDownInsertUp
+imap <M-Down> <Plug>upAndDownInsertDown
+vmap <M-Up> <Plug>upAndDownVisualUp
+vmap <M-Down> <Plug>upAndDownVisualDown
 
 " set options
 set nocompatible " needed by some plugins
