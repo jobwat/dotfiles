@@ -13,17 +13,21 @@ htop
 iterm2 # brew
 jq
 lftp
-macvim # brew
-vim # debian
+macvim # brew cask
+mas # brew
 #nmap
 #node
 #nvm
+928940999 # app-store pastebox
 rbenv
 ruby-build
 shyaml # brew
 the_silver_searcher # brew
 silversearcher-ag # debian
+spectacle # brew cask
 tmux
+vim # debian
+visual-studio-code # brew cask
 watch
 wget
 yq # brew

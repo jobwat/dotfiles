@@ -15,12 +15,16 @@ namespace :install do
     puts "Kernel: #{kernel}"
     if kernel == 'Linux'
       puts "Install packages"
-      system('cat packages.list | grep -v -e "^#" -e "brew" | sed "s/ .*//" | xargs sudo apt-get install -y ')
+      system('cat packages.list | grep -v -e "^#" -e "brew" -e "cask$" -e "app-store" | sed "s/ .*//" | xargs sudo apt-get install -y ')
     else
       puts "Ensure brew is installed"
-      system('brew -h >/dev/null 2>&1 || /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install.sh)"')
-      puts "Install packages"
-      system('cat packages.list | grep -v -e "^#" -e "debian" | sed "s/#.*//" | xargs brew install')
+      system('brew -h >/dev/null 2>&1 || /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"')
+      puts "Install brew packages"
+      system('cat packages.list | grep -v -e "^#" -e "debian" -e "cask$" -e "app-store" | sed "s/#.*//" | xargs brew install -q')
+      puts "Install brew casks"
+      system('cat packages.list | grep -v -e "^#" | grep "brew.*cask" | sed "s/#.*//" | xargs brew install -q --cask')
+      puts "Install app.store apps"
+      system('cat packages.list | grep -v -e "^#" | grep "app-store" | sed "s/#.*//" | xargs mas install')
     end
   end
 end
