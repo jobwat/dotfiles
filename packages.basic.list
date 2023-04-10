@@ -4,7 +4,7 @@ curl
 fzf
 git
 #git-cola
-git-gui
+#git-gui
 gnu-sed # brew
 go # brew
 htop
@@ -12,22 +12,15 @@ htop
 #imagemagick
 iterm2 # brew
 jq
-lftp
-macvim # brew cask
-mas # brew
+#lftp
 #nmap
-#node
-#nvm
-928940999 # app-store pastebox
-rbenv
-ruby-build
+ncdu # brew - NCurses Disk Usage
+rsync
 shyaml # brew
 the_silver_searcher # brew
 silversearcher-ag # debian
-spectacle # brew cask
 tmux
 vim # debian
-visual-studio-code # brew cask
 watch
 wget
 yq # brew

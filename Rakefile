@@ -8,33 +8,14 @@ namespace :install do
     puts "Updating crontab..."
     update_crontab("check_dotfiles_repo", "# Check dotfiles twice a week\n3 2 * * 2,5 $HOME/.bin/check_dotfiles_repo > $HOME/.dotfiles-msg 2>&1")
   end
-
-  desc "Install minimal packages set"
-  task :packages do |t, args|
-    kernel=`uname`.chomp
-    puts "Kernel: #{kernel}"
-    if kernel == 'Linux'
-      puts "Install packages"
-      system('cat packages.list | grep -v -e "^#" -e "brew" -e "cask$" -e "app-store" | sed "s/ .*//" | xargs sudo apt-get install -y ')
-    else
-      puts "Ensure brew is installed"
-      system('brew -h >/dev/null 2>&1 || /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"')
-      puts "Install brew packages"
-      system('cat packages.list | grep -v -e "^#" -e "debian" -e "cask$" -e "app-store" | sed "s/#.*//" | xargs brew install -q')
-      puts "Install brew casks"
-      system('cat packages.list | grep -v -e "^#" | grep "brew.*cask" | sed "s/#.*//" | xargs brew install -q --cask')
-      puts "Install app.store apps"
-      system('cat packages.list | grep -v -e "^#" | grep "app-store" | sed "s/#.*//" | xargs mas install')
-    end
-  end
 end
 
 desc "install the dot files into user's home directory"
 task :install, [:replace_all] do |t, args|
   replace_all = !!args[:replace_all] || false
 
-  # Install minimal brew packages
-  Rake::Task["install:packages"].invoke
+  # Install minimal packages
+  sh "$HOME/.dotfiles/ensure_minimal_packages_installed.sh"
 
   Dir['*'].each do |file|
 

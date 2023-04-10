@@ -11,7 +11,7 @@ Mac: git is available by default
 ## Installation
 
 ```
-git clone https://github.com/jobwat/dotfiles.git
+git clone https://github.com/jobwat/dotfiles.git ~/.dotfiles
 cd ~/.dotfiles
 git submodule update --init
 rake install
