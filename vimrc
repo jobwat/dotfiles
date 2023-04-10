@@ -10,7 +10,6 @@ call plug#begin('~/.vim/plugged')
 " syntax plugins
 Plug 'tpope/vim-markdown', { 'for':  'markdown' }
 Plug 'tpope/vim-haml', { 'for':  'haml' }
-Plug 'fatih/vim-go', { 'do': ':GoInstallBinaries', 'for':  'go' }
 Plug 'elzr/vim-json', { 'for':  'json' }
 Plug 'vim-ruby/vim-ruby', { 'for':  'ruby' }
 Plug 'kchmck/vim-coffee-script', { 'for':  'coffee' }
