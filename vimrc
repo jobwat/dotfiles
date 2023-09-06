@@ -35,10 +35,10 @@ Plug 'vim-scripts/upAndDown' "move selected lines up/down with option-arrows (fo
 Plug 'Townk/vim-autoclose' "auto-close brackets for you !
 Plug 'tsaleh/vim-align' "helper to align things
 Plug 'tpope/vim-abolish' "few Time Pope's toys, including the `Coercion` one `crc`, `crs`, `cr-`.. etc
-Plug 'dense-analysis/ale' "linting (use rubocop)
+"Plug 'dense-analysis/ale' "linting (use rubocop)
 "Plug 'jiangmiao/auto-pairs' " Insert or delete brackets, parenthesis, quotes in pair.
-Plug 'tpope/vim-fugitive' "embedded git, the Tim Pope's way
-Plug 'tpope/vim-rhubarb' "enable github page browse through vim-fugitive & hub
+"Plug 'tpope/vim-fugitive' "embedded git, the Tim Pope's way
+"Plug 'tpope/vim-rhubarb' "enable github page browse through vim-fugitive & hub
 Plug 'tpope/vim-unimpaired' "magic ]q jumps
 Plug 'mileszs/ack.vim' " silversearcher via ack.vim
 Plug 'bogado/file-line' "open file at line :line
@@ -166,24 +166,24 @@ let g:ale_fix_on_save = 1
 " -- some functions --
 
 " linting status in status bar - https://www.vimfromscratch.com/articles/vim-for-ruby-and-rails-in-2019/
-function! LinterStatus() abort
-  let l:counts = ale#statusline#Count(bufnr(''))
+"function! LinterStatus() abort
+  "let l:counts = ale#statusline#Count(bufnr(''))
 
-  let l:all_errors = l:counts.error + l:counts.style_error
-  let l:all_non_errors = l:counts.total - l:all_errors
+  "let l:all_errors = l:counts.error + l:counts.style_error
+  "let l:all_non_errors = l:counts.total - l:all_errors
 
-  return l:counts.total == 0 ? '✨ all good ✨' : printf(
-        \   '😞 %dW %dE',
-        \   all_non_errors,
-        \   all_errors
-        \)
-endfunction
+  "return l:counts.total == 0 ? '✨ all good ✨' : printf(
+        "\   '😞 %dW %dE',
+        "\   all_non_errors,
+        "\   all_errors
+        "\)
+"endfunction
 
-set statusline=
-set statusline+=%m
-set statusline+=\ %f
-set statusline+=%=
-set statusline+=\ %{LinterStatus()}
+"set statusline=
+"set statusline+=%m
+"set statusline+=\ %f
+"set statusline+=%=
+"set statusline+=\ %{LinterStatus()}
 
 " Sort lines and spot duplicated ones -- https://stackoverflow.com/questions/1268032/how-can-i-mark-highlight-duplicate-lines-in-vi-editor/28690847#28690847
 command! DuplicatedLines :sort | g/^\(.*\)$\n\1$/p
@@ -346,7 +346,8 @@ function! TerraformNeat() range
   " remove empty lines
   g/^$/d
   " add line breaks after each resource block
-  %s/^}$/}/
+  %s/^}$/}
+/
   " run fmt
   TerraformFmt
 endfunction
