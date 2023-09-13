@@ -89,9 +89,8 @@ bindkey '^p' _mvim_fzf
 # change z to use fzf if used without parameter
 unalias z 2> /dev/null
 z() {
-  [ $# -gt 0 ] && dir=$(_z -e "$*") || dir="$(_z -l 2>&1 | fzf-tmux +s --tac --query "$*" | sed 's/^[0-9,.]* *//')"
-  cd "$dir"
-  which loadenv >/dev/null 2>&1 && source loadenv
+    [ $# -gt 0 ] && zshz "$*" && return
+    cd "$(zshz -l 2>&1 | fzf --height 40% --nth 2.. --reverse --inline-info +s --tac --query "${*##-* }" | sed 's/^[0-9,.]* *//')"
 }
 
 mvim(){
