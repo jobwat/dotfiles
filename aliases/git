@@ -17,7 +17,7 @@ alias gpull='git fetch origin && grb origin/$(current_branch)'
 alias ga='git add -A'
 alias gm='git merge'
 alias gpnp='gpull && gpush'
-alias gl='if [[ $(current_branch) = $(main_branch) ]]; then git pull --prune; else git pull origin $(current_branch); fi'
+alias gl='if [[ $(current_branch) = $(main_branch) ]]; then pull_option='--prune'; else pull_option=''; fi; git pull $pull_option origin $(current_branch)'
 alias gb='git --no-pager branch'
 alias gcm='git checkout $(main_branch)'
 
