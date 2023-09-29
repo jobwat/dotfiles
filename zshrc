@@ -73,8 +73,8 @@ setopt NOCORRECTALL
 # load aliases scripts if defined
 alias_dir=${HOME}/.aliases; [ -d $alias_dir ] && for i in `ls $alias_dir`; do source $alias_dir/$i; done
 
-# show eventual dotfiles message
-cat ~/.dotfiles-msg | sed 's/^/[~\/.dotfiles-msg] /'
+# display eventual .rc messages
+find ~/.rc-msgs -type f -exec sh -c 'cat "{}" | sed "s#^#\[{}\] #"' \;
 
 # load FZF fuzzy matcher
 export FZF_DEFAULT_OPTS="--exact --no-sort"

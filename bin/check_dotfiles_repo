@@ -1,7 +1,5 @@
 #!/bin/bash
 
-msgs_file=$HOME/.dotfiles.msg
-
 cd $HOME/.dotfiles
 changes_to_push=`git status --porcelain | wc -l`
 if [[ $changes_to_push -gt 0 ]]; then
