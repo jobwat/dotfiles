@@ -50,7 +50,7 @@ export ZSH_THEME="josh"
 # oh-my-zsh still: do not check for upgrade by default, it's freaking annoying !
 export DISABLE_AUTO_UPDATE="true"
 # Which plugins would you like to load? (plugins can be found in ~/.oh-my-zsh/plugins/*)
-plugins=(git z docker kubectl)
+plugins=(git z docker fzf-tab)
 source $ZSH/oh-my-zsh.sh
 
 # update josh theme prompt slightly

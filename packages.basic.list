@@ -2,6 +2,7 @@ ack
 coreutils # brew
 curl
 fzf
+fzf-tab
 git
 #git-cola
 #git-gui
