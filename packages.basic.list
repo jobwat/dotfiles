@@ -2,7 +2,7 @@ ack
 coreutils # brew
 curl
 fzf
-fzf-tab
+#fzf-tab not a package - git clone https://github.com/Aloxaf/fzf-tab ${ZSH_CUSTOM:-~/.oh-my-zsh/custom}/plugins/fzf-tab
 git
 #git-cola
 #git-gui
