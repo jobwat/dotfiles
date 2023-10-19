@@ -88,3 +88,5 @@ z() {
   cd "$(zshz -l 2>&1 | fzf --height 40% --nth 2.. --reverse --inline-info +s --tac --query "${*##-* }" | sed 's/^[0-9,.]* *//')"
   which loadenv >/dev/null 2>&1 && source loadenv
 }
+
+eval "$(/opt/homebrew/bin/brew shellenv)"
