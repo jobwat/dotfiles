@@ -81,28 +81,10 @@ export FZF_DEFAULT_OPTS="--exact --no-sort"
 export FZF_DEFAULT_COMMAND='ag -p ~/.ignore -g "" -f'
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
 
-# other fzf hacks - thx http://owen.cymru/fzf-ripgrep-navigate-with-bash-faster-than-ever-before/
-function _mvim_fzf() { mvim $(fzf) }
-zle -N _mvim_fzf
-bindkey '^p' _mvim_fzf
-
 # change z to use fzf if used without parameter
 unalias z 2> /dev/null
 z() {
   [ $# -gt 0 ] && zshz "$*" && return
   cd "$(zshz -l 2>&1 | fzf --height 40% --nth 2.. --reverse --inline-info +s --tac --query "${*##-* }" | sed 's/^[0-9,.]* *//')"
   which loadenv >/dev/null 2>&1 && source loadenv
-}
-
-mvim(){
-  if [ $# -gt 0 ]; then
-    if [ $# -eq 1 ] && [ -d $1 ]; then
-      /usr/local/bin/mvim -c ":cd $1" $1
-    else
-      /usr/local/bin/mvim "$*" && return
-    fi
-  else
-    dir="$(_z -l 2>&1 | fzf-tmux +s --tac --query "$*" | sed 's/^[0-9,.]* *//')"
-    [ -n "$dir" ] && /usr/local/bin/mvim -c ":cd $dir" $dir
-  fi
 }
