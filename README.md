@@ -13,13 +13,12 @@ Mac: git is available by default
 ```
 git clone https://github.com/jobwat/dotfiles.git ~/.dotfiles
 cd ~/.dotfiles
-git submodule update --init
-rake install
+make
 ```
 
 ## Later usage
 
-### Changing shells:
+### Changing shell from bash to zsh
 
     chsh -s /bin/zsh
 
@@ -32,10 +31,7 @@ or back to bash:
 
     vim plugins are managed through vimrc itself now, see https://github.com/junegunn/vim-plug
 
-### Update
-
-    rake update
-
+    
 ### Acknowledgements
 
 Thanks to [Rufus Post]( http://github.com/mynameisrufus/dotfiles) for the dotfiles idea !

@@ -1,8 +1,8 @@
 [user]
-  name = <%= ENV['USERNAME'] || (print("Your Name: "); STDOUT.flush; STDIN.gets.chomp) %>
-  email = <%= ENV['EMAIL'] || (print("Your Email: "); STDOUT.flush; STDIN.gets.chomp) %>
+  name = ${user_name}
+  email = ${user_email}
 [github]
-  user = <%= ENV['GITHUB_USERNAME'] || (print("GitHub Username: "); STDOUT.flush; STDIN.gets.chomp) %>
+  user = ${github_username}
 [diff]
   renames = copies
 [color]
@@ -11,7 +11,7 @@
   status = true
   ui = true
 [core]
-  excludesfile = <%= ENV['HOME'] %>/.gitignore
+  excludesfile = ~/.gitignore
   autocrlf = input
 [alias]
   lg = log --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr)%Creset' --abbrev-commit --date=relative

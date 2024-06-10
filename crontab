@@ -1,0 +1,2 @@
+# Check dotfiles twice a week
+3 2 * * 2,5 $HOME/.bin/check_dotfiles_repo > $HOME/.dotfiles-msg 2>&1
