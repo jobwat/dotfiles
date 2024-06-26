@@ -41,5 +41,17 @@
   up = pull --rebase
   reopen = !sh -c 'mvim -p $(git d --name-only HEAD~1..HEAD)' -
   dn = diff --name-only
+  echo-remote-proto-and-host = "!f(){ REMOTE=origin; git remote -v | grep $REMOTE | head -n1 | sed -E \"s/^$REMOTE\\t+([a-z]+):\\/\\/([^\\/]+).*/protocol=\\1\\nhost=\\2/\";};f"
+  clear-credentials = "!f(){ git echo-remote-proto-and-host | git credential-osxkeychain erase ;};f"
+  get-credentials = "!f(){ git echo-remote-proto-and-host | git credential-osxkeychain get ;};f"
+  update-password = "!f(){ (git echo-remote-proto-and-host; git get-credentials) | sed \"s/password=.*/password=$1/\" | git credential-osxkeychain store ;};f"
 [push]
   default = current
+[credential]
+  helper = osxkeychain
+[branch]
+  sort = -committerdate
+[rebase]
+  autosquash = true
+[pull]
+	rebase = true
