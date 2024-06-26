@@ -2,3 +2,7 @@ gitconfig
 vim/.netrwhist
 .DS_Store
 .*.swp
+
+# Ignore most package lists
+packages.*.list
+!packages.basic.list
