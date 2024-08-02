@@ -55,3 +55,5 @@
   autosquash = true
 [pull]
 	rebase = true
+[advice]
+	skippedCherryPicks = false
