@@ -12,7 +12,7 @@ packages: gitsubmodule fzf-tab
 	$(HOME)/.dotfiles/ensure_minimal_packages_installed.sh
 
 link_files:
-	@for file in ackrc gemrc gitignore irbrc rspec vimrc agignore bashrc gvimrc rdebugrc tmux.conf zshrc; do \
+	@for file in ackrc gemrc gitignore irbrc rspec vimrc agignore bashrc gvimrc rdebugrc tmux.conf zshrc oh-my-zsh aliases; do \
 	  if [[ -e $${HOME}/.$$file ]]; then \
 	    if cmp -s $$file $${HOME}/.$$file; then \
 	      echo "identical $${HOME}/.$$file"; \
