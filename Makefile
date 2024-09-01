@@ -4,7 +4,7 @@ SHELL := /bin/bash
 
 all: install
 
-install: packages link_files gitconfig update
+install: packages link_files ensure_zsh gitconfig update
 
 update: gitsubmodule vim_plugins crontab
 
@@ -29,6 +29,9 @@ link_files:
 	    $(MAKE) link_file file=$$file; \
 	  fi; \
 	done
+
+ensure_zsh:
+	chsh -s /bin/zsh
 
 replace_file:
 	rm -f $(HOME)/.$(file)
