@@ -91,4 +91,4 @@ z() {
   which loadenv >/dev/null 2>&1 && source loadenv
 }
 
-eval "$(brew shellenv)"
+which brew >/dev/null 2>&1 && eval "$(brew shellenv)"
