@@ -75,6 +75,7 @@ setopt NOCORRECTALL
 alias_dir=${DOTFILES}/aliases; [ -d $alias_dir ] && for i in `ls $alias_dir`; do source $alias_dir/$i; done
 
 # display eventual .rc messages
+mkdir -p ~/.rc-msgs
 find ~/.rc-msgs -type f -exec sh -c 'cat "{}" | sed "s#^#\[{}\] #"' \;
 
 # load FZF fuzzy matcher
