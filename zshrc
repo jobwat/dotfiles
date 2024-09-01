@@ -42,9 +42,10 @@ fi
 export EDITOR="vim"
 export SAVEHIST=50000
 export PROMPT_EOL_MARK='' # remove the default % added by zsh when the output has no EndOfLine - https://unix.stackexchange.com/questions/167582/why-zsh-ends-a-line-with-a-highlighted-percent-symbol
+export DOTFILES=$HOME/.dotfiles
 
 # oh-my-zsh configuration
-export ZSH=$HOME/.oh-my-zsh
+export ZSH=$DOTFILES/oh-my-zsh
 # Set to the name theme to load. (Look in ~/.oh-my-zsh/themes/)
 export ZSH_THEME="josh"
 # oh-my-zsh still: do not check for upgrade by default, it's freaking annoying !
@@ -71,7 +72,7 @@ setopt NOCORRECTALL
 [ -f ${HOME}/scripts/sys-utils/my.rc ] && source ${HOME}/scripts/sys-utils/my.rc
 
 # load aliases scripts if defined
-alias_dir=${HOME}/.aliases; [ -d $alias_dir ] && for i in `ls $alias_dir`; do source $alias_dir/$i; done
+alias_dir=${DOTFILES}/aliases; [ -d $alias_dir ] && for i in `ls $alias_dir`; do source $alias_dir/$i; done
 
 # display eventual .rc messages
 find ~/.rc-msgs -type f -exec sh -c 'cat "{}" | sed "s#^#\[{}\] #"' \;
