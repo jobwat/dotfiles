@@ -89,7 +89,19 @@ git_commit_fixup () {
   # use $1 as gitref or fallback to fzf
   gitref=$1
   [ -z $gitref ] && gitref="$(git log --oneline | fzf --preview "echo {} | awk '{print \$1}' | xargs -I % sh -c 'git show --color=always %'" | awk '{print $1}')"
-  git commit --fixup=$gitref
+  git commit --fixup=$gitref --no-verify
+
+  # if git unclean - create uniq id and and stash with uniq id
+  if ! git diff-index --quiet HEAD --; then
+    stash_id="stash_id_$(date +%s)"
+    git stash -u -m "auto stash $stash_id"
+  else
+    stash_id=""
+  fi
+
   git rebase --autosquash ${gitref}~1
+
+  # if stash_id is not empty - pop the stash
+  [ -n "$stash_id" ] && stash_id=$(git stash list | grep "id=$stash_id" | cut -d':' -f1) && git stash pop $stash_id
 }
 alias gcfu=git_commit_fixup
