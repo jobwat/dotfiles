@@ -1,49 +1,28 @@
-# my git kitchen
+#!/bin/bash
 
-# note: few of the following need `current_branch` to give the current branch - see function sample here https://github.com/robbyrussell/oh-my-zsh/blob/291e96dcd034750fbe7473482508c08833b168e3/lib/git.zsh#L65
+# git aliases and functions
 
-function main_branch() {
-  git show-ref --verify --quiet refs/heads/main >/dev/null 2>&1 && echo "main" && return
-  git show-ref --verify --quiet refs/heads/master >/dev/null 2>&1 && echo "master" && return
-  echo "unknown"
-}
-
-# git-rebase aliases -- http://notes.envato.com/developers/rebasing-merge-commits-in-git/ -- thanks Glen's @ envato.com
-alias grb='git rebase --rebase-merges'
-alias gpush='git push origin $(current_branch)'
-alias gpull='git fetch origin && grb origin/$(current_branch)'
+# note: few of the following require handy functions `current_branch` & `git_main_branch` to be defined
+# see https://github.com/ohmyzsh/ohmyzsh/blob/master/plugins/git/git.plugin.zsh
 
 # more aliases
 alias ga='git add -A'
-alias gm='git merge'
-alias gpnp='gpull && gpush'
-alias gl='if [[ $(current_branch) = $(main_branch) ]]; then git fetch --prune; fi; git pull origin $(current_branch);'
 alias gb='git --no-pager branch'
-alias gcm='git checkout $(main_branch)'
-
-# all in one super git stash and do - inspired from Dam5s aliases
+alias gl='if [[ $(current_branch) = $(git_main_branch) ]]; then git fetch --prune; fi; git pull origin $(current_branch);'
+alias gpnp='gpull && gpush'
 alias gsl='git stash list'
-alias gspull='git stash && gpull && git stash pop || true'
-alias gspnp='gspull && gpush'
-
-
-# some more advanced one (lazy people only) -- http://stackoverflow.com/questions/6127328
-alias gplb='git checkout $(main_branch) && git branch --merged | grep -v "\*" | xargs -n 1 git branch -d'
-
-# refine some other aliases from https://github.com/robbyrussell/oh-my-zsh/blob/master/plugins/git/git.plugin.zsh
-alias glg='git log --stat --max-count=15'
-alias glgg='git log --graph --max-count=15'
+alias gspnp='gpull --autostash && gpush' # thx Dam5s
 
 # remove all merged branch from origin - thx https://gist.github.com/schacon/942899
 alias gdelete_merged='git branch -r --merged | grep "^origin/" | grep -vE "(>|main|master|feature)" | xargs -L1 | cut -d"/" -f2- | xargs git push origin --delete'
 
 # open github project directly - hub is amazing - `brew install hub`
 function gbrowse(){
-  if [ -n $1 ]; then
+  if [ -n "$1" ]; then
     if [[ "$1" =~ \b[0-9a-f]{5,40}\b ]]; then
       hub browse -- commit/$1
     else
-      hub browse -- blob/$(current_branch)/$1
+      hub browse -- blob/$(git_main_branch)/$1
     fi
   else
     hub browse
@@ -51,30 +30,6 @@ function gbrowse(){
 }
 # create github PR from the command line
 alias gpr='hub pull-request --push --edit --file <(git log --oneline --format=%B -n 1 HEAD && [ -f .github/PULL_REQUEST_TEMPLATE.md ] && echo && cat .github/PULL_REQUEST_TEMPLATE.md)'
-
-# fuzzy search branch - Over-abuse of fzf :nearly-ashamed:
-function git_fuzzy_branch_picker(){
-  cat <(git --no-pager branch | grep -v '\*') | fzf -m
-}
-
-# replace classic gco alias with function using fuzzy_branch_picker if no param
-function gco(){
-  if [ -z $1 ]; then
-    git checkout $(git_fuzzy_branch_picker)
-  else
-    git checkout $@
-  fi
-}
-
-# replace classic gbd alias with function using fuzzy_branch_picker if no param
-alias gdb >/dev/null 2>&1 && unalias gbd
-function gbd(){
-  if [ -z $1 ]; then
-    git branch -D $(git_fuzzy_branch_picker)
-  else
-    git branch -D $@
-  fi
-}
 
 # delete branch locally and on all remotes
 function del_branch(){
@@ -90,18 +45,6 @@ git_commit_fixup () {
   gitref=$1
   [ -z $gitref ] && gitref="$(git log --oneline | fzf --preview "echo {} | awk '{print \$1}' | xargs -I % sh -c 'git show --color=always %'" | awk '{print $1}')"
   git commit --fixup=$gitref --no-verify
-
-  # if git unclean - create uniq id and and stash with uniq id
-  if ! git diff-index --quiet HEAD --; then
-    stash_id="stash_id_$(date +%s)"
-    git stash -u -m "auto stash $stash_id"
-  else
-    stash_id=""
-  fi
-
-  git rebase --autosquash ${gitref}~1
-
-  # if stash_id is not empty - pop the stash
-  [ -n "$stash_id" ] && stash_id=$(git stash list | grep "id=$stash_id" | cut -d':' -f1) && git stash pop $stash_id
+  git rebase --autosquash --autostash ${gitref}~1
 }
 alias gcfu=git_commit_fixup
