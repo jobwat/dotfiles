@@ -13,6 +13,7 @@
 [core]
   excludesfile = ~/.gitignore
   autocrlf = input
+	pager = less -F -X # https://stackoverflow.com/a/14118014/474411
 [alias]
   lg = log --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr)%Creset' --abbrev-commit --date=relative
   clg = log --pretty=format:"%h%x09%an%x09%ad%x09%s"
@@ -53,7 +54,10 @@
   sort = -committerdate
 [rebase]
   autosquash = true
+  autostash = true
 [pull]
 	rebase = true
 [advice]
 	skippedCherryPicks = false
+[pager]
+  branch = false
