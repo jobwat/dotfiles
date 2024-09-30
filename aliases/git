@@ -6,12 +6,9 @@
 # see https://github.com/ohmyzsh/ohmyzsh/blob/master/plugins/git/git.plugin.zsh
 
 # more aliases
-alias ga='git add -A'
-alias gb='git --no-pager branch'
 alias gl='if [[ $(current_branch) = $(git_main_branch) ]]; then git fetch --prune; fi; git pull origin $(current_branch);'
-alias gpnp='gpull && gpush'
-alias gsl='git stash list'
-alias gspnp='gpull --autostash && gpush' # thx Dam5s
+alias gpnp='gpull && gp' # pull and push
+alias gspnp='gpull --autostash && gp' # thx Dam5s
 
 # remove all merged branch from origin - thx https://gist.github.com/schacon/942899
 alias gdelete_merged='git branch -r --merged | grep "^origin/" | grep -vE "(>|main|master|feature)" | xargs -L1 | cut -d"/" -f2- | xargs git push origin --delete'
