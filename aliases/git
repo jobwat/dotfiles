@@ -37,10 +37,15 @@ function del_branch(){
   done
 }
 
-git_commit_fixup () {
+git_log_explore(){
+  git log --oneline | fzf --preview "echo {} | awk '{print \$1}' | xargs -I % sh -c 'git show --color=always %'"
+}
+alias gle=git_log_explore
+
+git_commit_fixup() {
   # use $1 as gitref or fallback to fzf
   gitref=$1
-  [ -z $gitref ] && gitref="$(git log --oneline | fzf --preview "echo {} | awk '{print \$1}' | xargs -I % sh -c 'git show --color=always %'" | awk '{print $1}')"
+  [ -z $gitref ] && gitref="$(git_log_explore | awk '{print $1}')"
   git commit --fixup=$gitref --no-verify
   git rebase --autosquash --autostash ${gitref}~1
 }
